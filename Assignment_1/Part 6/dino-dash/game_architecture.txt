@@ -1,0 +1,55 @@
+Dino Dash Game Architecture
+============================
+
++----------------+     +----------------+     +----------------+
+|   Flask App    |     |  HTML/CSS/JS   |     |   Browser      |
+|  (app.py)      |<--->|  (index.html)  |<--->|                |
+|                |     |  (style.css)   |     |                |
+|                |     |  (script.js)   |     |                |
++----------------+     +----------------+     +----------------+
+        ^                      ^
+        |                      |
+        v                      v
++----------------+     +----------------+
+|  High Scores   |     |  Game Logic    |
+| (highscores.txt)|     |                |
++----------------+     +----------------+
+                               |
+                               |
+                  +------------+------------+
+                  |            |            |
+          +-------v-----+ +----v-----+ +----v-----+
+          |    Game     | |  Dino    | | Obstacle |
+          |   Class     | |  Class   | | Manager  |
+          +-------------+ +----------+ +----------+
+                  |            |            |
+                  |            |            |
+          +-------v-----+ +----v-----+ +----v-----+
+          | Game Loop   | |  Jump    | | Spawn    |
+          | Collision   | |  Update  | | Update   |
+          | Score       | |  Draw    | | Draw     |
+          +-------------+ +----------+ +----------+
+
+Flow of Execution:
+1. Flask App serves the HTML/CSS/JS to the browser
+2. Browser loads the game and initializes the Game class
+3. Game class creates Dino and ObstacleManager instances
+4. Game loop starts, continually updating and rendering
+5. User input (jump) is processed by the Dino class
+6. ObstacleManager spawns and updates obstacles
+7. Collision detection is performed in the Game class
+8. Scores are updated and sent to the Flask App for storage
+9. High scores are retrieved from the Flask App and displayed
+
+Key Components:
+- Flask App: Handles server-side logic and high score management
+- Game Class: Manages overall game state and coordinates other components
+- Dino Class: Handles player character logic and rendering
+- ObstacleManager: Manages obstacle spawning, updating, and rendering
+- HTML/CSS/JS: Client-side game implementation and user interface
+- Browser: Renders the game and handles user input
+
+This architecture allows for separation of concerns, making it easier to
+maintain and expand the game. The server-side logic (Flask) is decoupled
+from the client-side game logic, allowing for easy updates and potential
+future features like multiplayer or leaderboards.
