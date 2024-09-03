@@ -1,4 +1,4 @@
-# Experimenting with recent LLM developments 
+# Experimenting with recent LLM developments 🧪🧫
 
 Dino Dash Sneak Peak:
 ![image](https://github.com/user-attachments/assets/1744fb49-6e1b-40e7-bf0e-a2d80493bcba)
