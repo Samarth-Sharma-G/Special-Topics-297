@@ -1,0 +1,4680 @@
+﻿shipping uh uh and uh interacting with
+uh uh models is that there's no good way
+to check if the models are actually
+working uh in my opinion everyone uh uh
+everyone is still testing the waters and
+trying to see uh if we can actually put
+uh put uh put this out uh in the world
+and in my opinion a very vague uh a very
+good way to do that is to quickly try uh
+a lot of things and if you don't want to
+depend on like one giant monolith like I
+don't know uh open a um um uh Google and
+whatnot you need to experiment with
+local models um so after like saying bad
+things about big companies oh oops
+okay can I change slides from here cool
+I can um I am a Google developer uh uh
+uh expert in machine learning that um uh
+that's why you'll you'll see the name uh
+but I also used to do kaggle once in a
+past life currently I work at a Swiss
+startup called lightly uh AI weell data
+labeling as a service but backed by sort
+of uh smarter deep learning was
+particularly Active Learning and self
+and self supervised learning before that
+I deployed graph rag llms before like
+the rag word was a thing uh
+interestingly we deployed these things
+on VR headsets so extreme like CPU uh uh
+uh inference as well and before that for
+about like one one and a half years I
+used to work at weights and bces uh I
+was on the growth team I made all sorts
+of like uh uh developer content I'm
+based out of uh Manchester at the moment
+uh yeah some notes before we start
+please engage dur uh dur during the talk
+this was originally meant for like a
+longer I know 45 60 Minute tutorial
+since we only have uh 30 minute U um uh
+please ask questions in the middle
+pertaining to the topic of course uh
+slides are available on my website in
+case you want them uh beforehand I'm
+lucky enough to have like a unique name
+so if you just look me up my website
+should pop up somewhere uh and yeah uh
+after the session please feel free to
+ask like off topic uh questions as well
+so um this is funny uh uh actually but
+traditional uh uh llms
+involved pre-training and fine tuning uh
+I got into to uh ml before sort of uh
+Transformers were a thing so I remember
+the days when uh everyone was training
+their own um uh uh models this is of
+course ancient knowledge these days um
+the rag workflow is um so um giant
+corporates make uh uh uh models and
+release them nowadays trained on both
+sort of uh web corpora and also uh
+synthetic data then uh all of us try to
+use our custom uh um knowledge bases and
+make some uh something actually tangible
+for um uh
+users also like before I start um let's
+think of like a good way to eliminate
+how many of you consider yourself as
+like technical AI uh uh Engineers I use
+less jargon that
+way okay so from where I see it's like a
+40% technical
+uh audience who I'll try to use like
+less
+Jons but I hope everyone can agree with
+the fact that all of us are like trying
+to build something with uh llms trying
+be the keyword here if some of you think
+that you have successfully deployed uh
+llms in your own use cases please uh uh
+have a chat with me um uh uh afterwards
+but yeah most of these use cases revolve
+around either processing uh uh
+unstructured
+uh um uh data formats if you look at
+this Summer's uh YC portfolio almost
+half of the companies are trying to make
+sense of uh PDFs I don't know um YouTube
+uh uh videos law books and whatnot the
+other half are trying to build sort of
+uh customer support uh QA boards and
+then of course there are like bigger
+companies trying to build conversational
+uh uh agency of startups like uh
+anthropic CLA and whatnot there's like a
+little star there on workflow um uh
+automation I have lately seen some
+people trying to actually ship uh AI
+agents out in the real world to automate
+things if you have one uh uh one of
+those please let's talk uh but uh over
+the years we have seen uh a sort of uh
+Evolution from one sh prompting that's I
+know the typical chat GPT um uh uh use
+case to few short uh uh examples so
+that's when within the prompt uh uh
+itself you're saying I Know sample input
+one sample output two sample uh uh input
+two and like uh U here is what my uh uh
+actual prompt is and then lately so
+Vector augmented uh uh inference so uh
+Vector databases multimodal um uh uh
+embeddings and whatnot um the last AI
+engineer talk by Lama
+uh uh index mentioned the word agentic
+workflows uh so that's going Beyond
+summarization and sort of focusing more
+on performing actual real life tasks
+this is where I believe the key sort of
+um Power behind uh uh llm lies but do
+people actually use it who
+knows uh cool so a quick uh rag primer
+uh new M same task uh did someone get
+that reference no nerds here okay I
+heard a laugh okay so okay cool so
+um
+um assuming you have your um your own C
+Uh custom um knowledge bases in some
+format the key four steps are so you
+index your um your data sets to create
+uh embeddings you store them so you
+don't need to index them again you query
+them that's the main
+uh uh llm bit and the actual key use
+case in deploying these things is
+evaluation uh that's where like most of
+the sort of quote unquote real work uh
+uh in rag uh is happening these
+days uh but again passing retrieval quer
+uh um quering these are old sort of well
+studied Concepts in uh NLP I come from a
+family of uh uh academics my parents
+studied uh
+uh these things in The Bachelors in the'
+70s as well so these are like very
+well-known things um the key novelty
+behind this whole uh uh uh rag thing is
+the use of uh llms to actually do um uh
+quing before this you had to handcraft
+your own features your own uh heuristics
+but with uh llms we can uh alleviate
+that need and hopefully just like run uh
+uh inference on whatever you want but
+like this comes with the drawback of
+having to like really uh evaluate your
+models and this is like uh something
+will um uh discuss as well so again
+three things uh that uh I had mentioned
+in uh different colas as well so rapid
+prototyping and local models like let's
+dive into each of these three things in
+uh detail as well so just don't try to
+reinvent the wheel just like Leverage
+open source I still come across some
+people who have spent like most of their
+uh life in sort of quote unquote uh uh
+corporate word and they don't trust uh
+open source yet F the F the future of AI
+is definitely uh open source so just
+please try and uh uh leverage as many
+open source um libraries uh as you can
+some of my favorite ones for uh
+ingestion particularly is uh llama index
+and uh unstructured uh IO for uh
+indexing you you can use a bunch of them
+uh llm Ops question mark have we
+actually accepted that word or not I am
+particularly biased to use uh vits and
+B's uh own VI uh offering as a ex uh
+employee but if you know of yep
+sure
+uhh
+uh I have no clue uh uh so L uh llm Ops
+uh from what uh I can tell is a subset
+of mlops focusing on how to use uh L uh
+llms so it just the same thing as mlops
+tries to do but focused on
+llms um so I know uh for mlops
+particularly let's see there's
+experiment tracking uh in llms you're
+not when you use l llms you're not
+usually training your own models you're
+just using them for inference so the the
+the same sort of parallel for training
+is llm tracing so that is um given a
+query what output do you get right or
+there could be data drift monitoring so
+how does your actual text uh text COA
+change over time and do you need to use
+different sort of chunking um uh uh
+strategies I've I've also seen stuff
+like uh llm routers come up so which
+sort of backend uh llm model to use if
+that
+helps y the artifacts are usually
+different the artifacts are usually
+prompts in the case of llms and models
+in the case of mlops I mean the same
+tools are used like you could use ml
+flow for tracking llm Ops stuff as well
+so you could use the same tools for both
+um I think I saw one more hand come up
+uh yeah I think in the pre LM era a lot
+of the times in an operational
+environment you can keep all the ml
+stuff away you do the work in in advance
+and pre-compute things with llms it's so
+tempting to do something at runtime then
+you've got this huge context
+increasingly big context to pass it
+which gives operational Engineers a lot
+of a lot of headaches thank you for uh
+bringing that
+up I think you have
+one yeah I think he answered so it's
+like mlops is like more predictive way
+of doing what we done earlier like llm
+Ops most used in a very advanced level
+of setup I seen uh it's still in early
+stage like you use for fine tune and
+prompting then you put it in a like a
+devop cycle like mlop cycle and you
+inject it to llm so that's a cycle we
+try to how do we so there's a difference
+between how do we do devops if most of
+them know the similar way we use mlops
+and similar way the end point of of each
+thing is different in LL llm Ops it's
+most llm mlops is like most like we
+creating a machine learning model where
+the artifacts will inject into then
+devops we have this kubernetes and
+continuous where we get the artifacts
+it's a kind of we have to correlate the
+things so it's much more easier I just
+want to add the note for you
+yeah thank you and also thank you for uh
+uh asking the the question as well I'm
+sorry if I missed like a question uh
+earlier I'll try to look more do you
+have a question sir do you have a
+question okay no sorry um but yeah um
+cool uh so
+um if you quickly want to iterate
+building rag uh uh application some uh
+uh something which I noticed when uh I
+was uh uh uh building them was caching
+becomes very uh important I put cash in
+quotes here because uh it's not in like
+the traditional uh computer science
+sense by caching I mean like just like
+storing as many artifacts as you can in
+most cases after you have generated s
+sort of your uh index or your vector
+database you won't need to generate them
+again so you don't need to like every
+time just create the uh index again just
+create one write it to uh uh memory
+store it in Cloud uh uh uh uh whatever
+but like cache all of your sort of quote
+unquote uh uh artifacts that that you
+have uh as rightly um mentioned so uh
+one particular INF cycle uh in uh
+involves a bunch of things and it's uh a
+very good uh good thing to uh what a
+good thing to do is just try to track
+like what each step takes um if people
+are not familiar with this this is uh
+weights and bies we've not sponsored uh
+yeah so one one query uh took 12 seconds
+uh in which like 2 seconds was just like
+retrieving some uh uh something from the
+the database and the next 7 Seconds was
+just uh sending it up to uh anthropic
+server and like uh getting a request
+back so if you sort of like profile
+every step this way you can know like uh
+which part of of your pipeline is
+actually slow and then you can sort of
+um uh itate um U better on top of it um
+the retrieving case in most uh uh cases
+can be solved by again using some sort
+of fancy uh caching um uh techniqu so
+again just re uh saying it again profile
+your workflow try to figure out like in
+one entire call um what the slow aspects
+are cuz uh as uh as H you 12 seconds
+just not acceptable uh amount for any
+sort of app like you won't wait 12
+seconds to hear back from I know uh uh
+uh charp or um uh uh or Cloud um know
+your data and which Vector database to
+use for it um I used to work at a
+startup where we had to work with um
+medical knowledge crafts which had text
+at their nodes so just using like a
+simple a list based Vector uh uh index
+was not good and like after three three
+months we had to like get rid of uh uh
+everything and build something uh uh
+again so try to figure out what your
+data is and what you need from it in
+most cases like a simple sort of uh uh
+list view should work I know if you're
+working with uh PDFs websites mostly um
+um uh lists are enough but if you have
+any sort of other geometry or structure
+to it use the um uh appropriate um uh uh
+database the best reference that I know
+of is uh llama indexes documentation of
+vector DB they um they lay out like uh
+which database type to use for um which
+um source and again make sure your data
+inje pipeline is flexible over the past
+year alone I've seen people go
+from um PDF based workflows to now lamap
+pars uh is a thing to now like uh
+uh uh data privacy is a thing again
+after 3 months you you might want to
+shift from like a list based View to a I
+don't know um um a map based view so
+like just make sure the data pipeline
+that you are making is flexible uh
+enough for you to um uh it uh iterate on
+later
+um prototyping bit in my humble uh uh
+opinion if you quickly want to build
+some something and showcase it to your
+um I know uh manager the best way to do
+it is use Lama uh index for ingestion
+use some sort of API based uh inference
+either um I think anthropic has one at
+this point and like in case you uh you
+want to build like a web UI for it you
+you can use like streamlet or radio um
+start very small and then tune for your
+needs it's very easy to sort of uh over
+engineer uh everything and try to stay
+uh and try to have like a agentic
+workflow in the first place but uh even
+if you like build a simple Pipeline and
+then check the times again for most
+cases it might be more than like uh 10
+seconds per uh inference call Char GPD
+is fast because it's backed by like huge
+GPU uh uh compute even at uh inference
+time you probably won't have that so
+just start small
+um and then uh uh uh try to uh uh
+improve on top of it from what I have
+experimented with just using raw data
+works very fine by raw I mean just like
+no chunking no
+sentence uh uh passing just just um in
+just the whole PDF and it should work
+fine I'll showcase um sort of um a demo
+as well which just shows like a like a
+robw PDF works well and depending on
+your use case again you might have to
+look into uh splitting and chunking but
+for most use cases it will work fine um
+I saw this on Twitter some some
+somewhere what you're building is in
+most cases unique but also mostly
+similar so uh this is just like the the
+8020 rule 80% of all pipelines will be
+the same but the key difference will be
+in those 20% so just use a template uh
+from uh I know um maybe um llama uh
+index or uh axol right and then just
+like try to find you it to your own
+needs uh you will most likely build
+something different therefore sharing
+ideas is important uh I've seen a a lot
+of people create hype about what they're
+building but not actually share ideas
+you can share ideas without revealing
+your uh IP just like helps uh uh
+everyone as well again the no free lunch
+theorem still exists so there will be
+like there is no single learning
+algorithm which works for uh everything
+you will have to find U uh uh fine tune
+uh and change things lastly I want to
+touch on evaluation so you need to know
+what your metric is most
+industrial metrics don't correlate with
+u sort of real world uh data I'm not
+sure if you C about the whole
+bm25 um drama or not but all of your
+metrics uh will be different you can't
+just simply use like I know uh an
+off-the-shelf um metric you you will
+need to create a metric of your own
+which is valuable to your own company to
+your own kpis learn to make one and then
+uh monitor that over um uh the data
+drift uh lastly local mod I quickly want
+to touch on this when I initially
+submitted the the talk I had very strong
+sort of uh opinions about only using
+local models but I don't know I work on
+a 2020 M1 MacBook Pro 8 GB Ram I can't
+do much uh so uh my thoughts have
+changed uh uh over the past few weeks
+but like the key motivation uh vs would
+be all the prompts live on your own
+servers if you're using uh local models
+Char GPT like uh By Now default uses
+your own uh your given uh input for
+training as well so if that is a concern
+you might want to use um local mod
+models uh the infrastructure lies in
+your hands uh you can spin up as many
+gpus uh as you want if you want to run
+on PR CPUs you can do as many CES uh uh
+as you want also the pricing is then in
+your own
+hands um this is again coming back to
+the monolith Point um open AI might
+decide to uh change pricing whenever
+they uh they want they might charge
+differently for uh images and text so if
+you choose to go local uh the pricing
+remains uh in your hands how to do it we
+have our friends at uh hugging phas with
+the world largest um uh model Hub out
+there local doesn't always mean bad um
+there's
+a great work being done by um unslot in
+creating sort of extremely nice even
+like 4bit um uh quantized U models which
+run like 60% faster and take up like 70%
+less um memory so local doesn't always
+mean
+bad um yeah let's go over like some
+naive rag uh examples when I say naive
+these these are like extremely simple
+textbook
+uh uh examples and if we have time uh I
+would like to Showcase like a real demo
+as well uh but yeah firstly like I like
+dinosaurs a lot so uh an idea that I had
+was uh what if I have any questions
+about the original Jurassic Park movie
+right so someone was nice uh uh enough
+to post the actual script online
+so uh you can use uh one of the readers
+from uh Lama uh uh index to just read
+the whole script this is just raw
+information in type font right and um
+this will uh uh hopefully uh help with
+uh what I said uh uh earlier that in
+most cases raw dat uh uh uh data should
+work fine in case the font uh is not
+readable again slides are there um uh on
+my um
+um website but yeah so three lines of
+code to like actually ingest everything
+then um you can choose like across a
+bunch of uh Vector databases based in my
+uh experiments just like the default one
+offered by um uh Lama index is uh is
+nice uh a side note on what I said on
+caching so once you create your index
+this is a time-taking process by the way
+you can just like write it to disk save
+it on cloud and next time when you want
+to use it you can simply either download
+it or load it
+from um um memory again and then yep
+sure five more minutes okay cool um so
+um this is like a local model uh example
+but again you can use any model from uh
+uh hugging face within a llama index uh
+pipeline you can pass in as many uh
+options as many configurations uh as you
+want uh you can provide uh templates as
+well uh I believe the example that I'm
+showing you right now is Lama 2 and the
+question that I asked is are
+Velociraptors pack Hunters if you have
+seen the movie you know the answer is
+yes and this is the same slide as before
+it says yes Velociraptors are back
+Hunters so it was able to read I don't
+know like a 500 page uh movie script and
+like um uh extract that uh information
+again it took 12 seconds so there's a
+lot to improve here mostly it's slow
+because of the inference call uh it's
+hidden but uh it took like 7 Seconds to
+actually run the query and this is why I
+have mixed feelings about local mod
+models uh all the the papers will show
+that I know we have such fast uh
+inference rates but that's on like 8 H1
+100s I don't have that I have like a 8
+gab uh M1 um MacBook be um I also like w
+be we uh so another idea that I had was
+to create um a documentation bot of my
+own so uh they have their own website
+with the documentation on it so instead
+of scraping the actual website what I
+thought I would do is I I'd clone the
+repository
+itself um Point uh a reader to their
+docs directory and just read all the
+markdown files U so yeah again like
+similar like three four lines of code uh
+in uh for this I used uh anthropic and
+then I asked like what what python uh
+version does weave require and boom it's
+3.9 this information is actually not on
+their site you can go on uh we
+documentation and uh and search it so
+I'm assuming it read it from like um
+somewhere U within the docs I also like
+to try to keep up with AI this is
+something I shipped an hour a uh ago I'm
+calling it The Daily paper CLI so if you
+guys know uh AK from hugging face he
+recommends sort of like uh 10 11 papers
+uh every day so this is like a CLI board
+that I built so um you can run the CLI
+it'll tell you like um the eight nine uh
+uh papers that uh hugging face
+recommends you read and then if you want
+the summary of a of a particular paper
+you can tell it which ID you want and
+then it'll use anthropic by default um
+to uh uh sort of so it downloads the
+whole paper ingests it sends it to uh
+anthropic to generate a summary and then
+get the query back uh and then if you
+have any questions about the paper as
+well you can just press yes and that
+lands you in a a chatbot environment
+within the CLI as well and again I
+shipped this an hour ago I built this in
+three hours so it is still quite hacky
+you can install it from
+PPI if you want just pip install daily
+hyphen papers or underscore it's one uh
+it's one of those uh but yeah uh I will
+release like um a hugging face space for
+it as well so again if you daily want to
+uh read stuff you can do that I believe
+we are out out of time so if you have
+any questions please thank
+you uh which I it's different for uh all
+three but by by default I just stick to
+llama indexes Vector but in case uh so
+my friends at uh V and uh uh uh biases
+they have their own documentation bot
+called wbot and they use chroma DB I've
+not seen a lot of people use it but they
+get like great performance from it so
+yeah not my recommendation but um what
+could be the use case for this like why
+someone will be using this what is the
+typical workable use case
+what you showing like local Lama or
+local uh gbt or whatever you so what
+could be the use case that why someone
+should uh use that you think the best
+thing that I can think of is that it's a
+starting point to then develop agent
+Tech workflows I have always felt that
+rag is a hacky solution it's just like
+one of the ways that uh we have figured
+out how to use uh our own uh uh data in
+conjunction with llms but if you're
+talking about like a pure rag based
+workflow so no uh agents just rag in my
+opal it'll just be limited to
+summarization I think that's the only
+only task that we can solve quite well
+using ply
+ranks hi um is it possible to get your
+presentation to test your code um yeah
+of course so uh the slides are on my
+website if if you want each code in
+particular it's not Linked In the slides
+however
+uh daily papers is on our own repository
+uh the the the Jurassic Park use case is
+available on VES and bces as a blog post
+and uh the we example is on my own
+notebooks depository so it's there if
+you want it uh if you want each
+particular code just like DM me or meet
+me after the talk I'll let you know
+which one it is also we will be sharing
+talkers talkers presentations on the
+select Channel
+after uh he had a question
+is thanks have you looked at all at
+using SQL databases in a rag context
+where the llm is writing the SQL yep
+teach it SCH and so on wait where the
+llm is writing the SQL yeah or plugging
+stuff into SQL templates ah okay I have
+not worked with those but I have read
+about them I was going to intern at a
+company which just did that
+um my own personal thoughts it's still
+hacky I don't see how a client would
+ever want to do that that is too risky
+but yeah sure it could be
+done not a satisfying answer but sorry
+yeah that's all I last
+question to to sort of answer his
+question I have uh I've used like agents
+and llms with um SQL Rag and like he
+said it is a little hacky but a solution
+to that is just uh writing your own SQL
+queries uh as Tools in in either Lang
+chain or Lang graph for example so
+basically you'll provide it the uh SQL
+code that you're running uh what will
+change is just the query
+values yeah
+yeah uh yeah I mean I specifically used
+it for a use case where uh I was adding
+for example bookings to a to an SQL
+table U I'm I'm not talking about
+semantic search here
+yeah
+yeah the questions thank
+you thank you uh again I came up with it
+last weekend and the only reason I
+published the package was I was pretty
+sure if I didn't publish it someone
+would claim the package name on on pipia
+so I just published it there and then
+yeah thank you thank you it was a
+interesting talk and I enjoyed
+it we have a few minutes break until the
+next speaker is setting up so you can uh
+have some refreshments on the left and
+uh go to the
+bathroom
+e
+e
+e
+e
+e
+e e
+hello um please start coming back please
+start coming
+back last time we
+do you want to use this or you want to
+use the thing this is fine yeah okay I
+just yes it's already turned on you just
+talk close to it I will is this audible
+yeah Lou
+now be on myself
+I'm done it
+something before you start just let me
+know when you're going you mean to yeah
+yeah need to let everyone know about
+sckers can't take because we left some
+stickers in the chairs and the one I'll
+hand it over
+to so our next speaker is uh P join from
+uh City BN um yes please hi everyone if
+he can have your
+attention hi everyone just one quick
+notice uh we left some stickers in the
+chairs feel free to take them home if
+you want to uh you can actually take
+them
+home hi everyone good evening I hope I'm
+audible great it's great to be here
+talking about our generative AI journey
+to make it real for our Enterprise and
+at scale so I'm pile I look after
+engineering and platforms for City Bank
+my remate is simple to modernize the
+Bank inside out and I that takes a lot
+of doing my team is responsible for
+building the core platforms some of the
+core platforms I should say that the
+bank runs on including the generative AI
+ecosystem before joining City I spent a
+good part of my career at Google and
+Salesforce building Planet scale
+products and it's been a very
+interesting Journey so to give you a bit
+of a view into the scale of city city
+operates in around 100 countries and has
+about 35,000 Engineers how that is
+relevant to our conversation here today
+is that everything that we engineer
+everything that we develop every service
+every technology that we use has to be
+very aware of country specific policies
+regulations and that makes it incredibly
+interesting to build something at
+scale we've been interested and very
+keen on generative AI from the get-go
+from GPT 2 days and um extremely Keen
+actually when chat GPD was launched and
+ever since then there's been no looking
+back in fact one thing that we knew from
+the get-go and that is that if we had to
+make gen happen if we had to embrace it
+in the company a bank at scale we had to
+build very robust foundations and in
+fact that's what we've been very very
+hard at work doing making it real
+building these
+foundations along the way there have
+been so many lessons that we've learned
+that is what I want to distill down for
+you uh this evening so before jumping
+into that what I want to do is very
+quickly if I can get to the next slide
+which for some reason is not tabbing
+give me a moment
+please I know s of you got that done
+Su okay
+okay great thank you so I want to give
+you a bit of a context and a view of
+what the ecosystem looks like currently
+this is evolving at a very rapid Pace it
+changes every week three months down
+it's not going to look the same but this
+is where it stands today at the heart of
+it is the AI Gateway and why is that so
+important because that is the layer that
+gives us the security the scale the
+auditability the Telemetry meter that we
+need so it really holds everything
+together and that is the thing that
+fronts all the conversations all the
+communication all the requests that we
+make to the models that we have at the
+moment in the in the
+repertoire and on the top of the AI
+Gateway we've been able to stand up some
+very value added functionality some
+layers that we've developed particularly
+all the Enterprise Integrations that
+we've built on the top of the Gateway
+also the fact that we now have a rack
+store that's come together again very
+much tight to the central ecosystem the
+AI Control plane our eals framework that
+you referenced extremely important so
+that started to come together and mature
+again very much linked to the AI Gateway
+and several other value added
+functionalities all the applications the
+business applications that we enabling
+they talk to the Gateway and are able to
+then communicate with the models that we
+have enabled at this point in time time
+lastly what you don't see here on this
+slide is this concept of AI blueprints
+that we have rolled out which means that
+if there are any of these countries any
+part of business that needs to build an
+application we are able to codify the
+best practices that they should get
+started with so these are codified
+blueprints as part of the central um
+Central infrastructure Central packaging
+more accurately is is what we have and
+certain business tools as well so
+generic utilities that business units
+across the globe across these countries
+can use to interact with generative AI
+so that's where we stand currently now
+starting to get into the first lesson
+that comes to my mind as as you'd
+imagine I'm from a bank so this is this
+is very very important controls and
+Automation and this is something we had
+realized nice and early that to be able
+to make this happen we had to automate
+this and we had to be able to apply
+controls along the way it's very
+regulated so we currently apply controls
+to everything that we do at various
+points in the journey when you think
+about the journey from the lens of
+generative AI it's got three key points
+applications the Gateway models and the
+model providers the cloud provider so
+that's exactly what we do apply controls
+along that Continuum for applications as
+an example something that we do is let's
+say we've got an application that
+summarizes documents PDFs document docx
+files pptx files Etc we ensure that we
+check for sensitivity labels to see if
+there is any restricted data in the
+document does it have sensitive pii data
+and such and we are able to then
+determine which country it's originating
+from where does the data reside and
+based on that we are able to really root
+the workflow to an appropriate model so
+that's an example of a control applied
+as left as possible at the application
+Level thinking about the Gateway there
+is there's a series of control that we
+apply and I must mention which I did not
+on the previous Slide the Gateway is not
+a product that is off the shelf we have
+developed it from scratch and uh I feel
+very proud that we've engineered it
+inhouse it's a set of goang services
+very lightweight extremely performant
+very scalable uh which are packaged up
+run in kubernetes and we happen to have
+clusters as you'd imagine across data
+centers hosted on Prem to keep us more
+secure so that's where that's where the
+control plane the Gateway runs and what
+that makes possible is this concept of
+pluggability so coming back to controls
+we apply a series of controls and checks
+when a request is traversing via the
+Gateway all the way to the model and
+some examples of that would be as you'd
+imagine is the prompt safe are we
+leaking any pii are we leaking any City
+specific entities and that could be
+employee IDs keys artifactory keys
+things like that
+you're also able to assess requests in
+terms of inspect requests in fact in
+terms of where did the request originate
+from what is the IP address which users
+are making these call outs are these too
+many call outs metering it rate limiting
+it and also making sure that the right
+thing is happening via the Gateway and
+um also archive these requests and I
+keep saying requests but it's requests
+and responses as well for forensics and
+for auditability so those are some
+examples of the controls that uh we
+apply thinking about the model
+themselves we we happen to use a variety
+of models from across provider so
+Google's one anthropic almost getting
+enabled um open AI models via Azure and
+a set of Open Source models as well so
+open source open weights models and what
+we we ensure contractually with some of
+these larger providers is to make sure
+that one there's no logging that happens
+in the Cloud environment that the model
+is hosted on that's one and second that
+the models don't learn from our data so
+that's something that's incredibly
+important to us and that's um generally
+part of the contract when it comes to
+larger providers and of course for open
+source models they happen to run very
+much on kubernetes within our ecosystem
+so the level of comfort we have with
+those is a lot higher another thing that
+I'd like to mention is that certain
+functionalities are extremely attractive
+and example would be caching context
+caching in particular that Google has
+enabled we would love to use it but we
+take a very cautious approach to using
+some of these functionalities because
+invariably what caching would mean is
+data residency in the cloud or wherever
+the provider provides their services and
+that's not something that we can take
+lightly which means we threat model we
+make sure that the the the service of
+the feature safe to use and only then do
+we have it enabled within our ecosystem
+which also means that at times we end up
+building what is available out of the
+box but uh but that keeps us safe so
+those are some of the controls that um
+come to mind that have been very handy
+for us along the way and in doing so
+what's happened is that we're able to go
+faster because we feel more comfortable
+in being able to use more and more gen
+in our um almost ba processes we're
+going to get there sometime
+soon sure
+that's a good question so at the moment
+the god rail service that I'm referring
+to is something that we've developed in
+house we do use a couple of Open Source
+models to make that happen for prompt
+injection pii detection and um entity
+detection so to speak we are actively
+looking at some vendor products such as
+Lera protect Ai and others as well but
+um that's another story at the moment
+it's our in in grow homegrown tool
+machine learning classifiers because
+it's an interesting problem if it's llms
+validating the output it could either
+mean mean latency if these llms happen
+to be on Prem or it could mean leaking
+some data so that doesn't really help us
+very
+much do you actively monitor the I know
+Twitter or whatever for prompt injection
+attacks and H swap between your
+providers depending on what's going on
+that week
+no not really no it's kind of a hobby
+for a lot of people is to H yeah to get
+the models to misbehave for most part is
+harmless but for your kind of setting
+yeah I think we very shielded from that
+so
+far okay so I was interested to know how
+would you protect yourself from the data
+that the model was already trained on
+you have a contract with the cloud
+provider they don't TR on your data yeah
+but they might have TR on somebody
+else's data H that might be influencing
+your data that results that you're
+getting yeah I think so just to so the
+to repeat the question the question was
+how do you protect yourself from the
+data that the model is already trained
+on because the results you see would be
+colored based on the training the model
+has had yeah it's it's it's it's a
+problem that one has to protect oneself
+again so a lot of it perhaps goes back
+to use cases and the capacity in which
+you're consuming the output I'd say a
+lot lot of our use cases as you'd
+imagine are a lot around documentation
+report generation reviewing documents
+that's one set of use cases simplistic
+ones but there that's a very common
+pattern and the other are around code
+generation code reviews
+Etc you'll see that and I'll I'll cover
+that but um the capacity in which we use
+models how much automation do we want to
+bring into the mix strategically and
+currently we've been very conscious
+about that which means that we do very
+firmly believe that um where the
+reasoning abilities stand we need to be
+able to have these models grounded in
+some reality and which is human evales
+something deterministic so that really
+gives us that guardrail which is a human
+review which is generally more critical
+in nature that's one way of looking at
+it rag use cases again simpler because
+you have a lot of grounding that you can
+provide as input and context so that is
+what we fall back on and that's really
+stood Us in good stad so
+far
+mhm we audit yeah we audit the yeah
+requests and responses
+yes well when I said audit I didn't so
+much mean model responses in terms of
+correctness that is a different part of
+the journey not when I say audit I mean
+really making sure that what's going to
+the models what's coming back is safe
+you're not leaking information we're not
+talking about things that we shouldn't
+be talking about the responses could be
+off track but then evals is what keeps
+us to point on that
+front
+yeah
+yeah interesting questions again get
+gets it to a proprietary space but that
+is more contractual with with the
+providers
+yeah any other
+questions
+LMS like like you have that in place it
+was amazing actually what You' have
+achieved in house so you have some sort
+of llm Ops in place um we have llm Ops
+in place but I think we're maturing it
+as we go along what we yeah what do you
+mean l with L Ops for me is generally
+observability and the ability to see
+exactly what's happen
+that's been a motivation gen or non gen
+for us know what's happening have that
+data visible have it visible in a
+self-service manner so that's what we
+are almost doing the same thing for Gen
+and making it visible and also
+Deployable right not very
+Deployable exactly yeah yeah very
+repeatable yes and the other thing maybe
+if you'll cover and answer it in the end
+is like why do it like what's the ROI oh
+yes sure that's an interesting question
+isn't it okay so I think we segue into
+this this subject here taking a
+staggered approach and I think perhaps
+this is going to resonate with most of
+us here being able to be iterative and
+try things out is extremely handy but
+what I want to cover when it comes to
+this is a few things so it's it's an
+Enterprise it's a very large
+organization by taking a staggered
+approach I mean a few things so as we
+started and this may have been 9 to 12
+months in the past are slightly longer
+we knew that to make this successful we
+needed a level of awareness across the
+organization which which led us to
+actually forming a Leadership Council
+across City putting together a task
+force making sure there's representation
+from across the bank and that means
+across countries across departments Etc
+making that happen because that one
+built awareness second we had a whole
+set of use cases that people wanted to
+take to production and when I say a
+whole set of I mean hundreds of them
+registered saying these are good
+candidates but we had to sift through
+the best ones and by that I mean
+thematic use cases that would bring us
+the mo most return on investment at
+least notionally and that's how we went
+about it and that that that meant a
+dozen of use dozen use cases that we
+wanted to focus on put our energies into
+prototype prototype more seriously and
+then be on a p to production with those
+use cases along the way maturing the
+ecos system maturing the architectural
+building blocks that I had um that I
+showed you and also maturing processes
+our governance function a compliance
+function and letting teams in um very
+key departments such as risk to catch up
+to thinking about new ways of handling
+risks and risk mitigation strategies so
+that is what uh we could do because we
+took an approach like this that's one
+second we did not we decided not to
+commit to a single model provider very
+early in the game which means have
+access to more models put in the effort
+and have multiple model providers in the
+mix and and connectivity established and
+everything that's needed to bring to
+life a new platform so we did that and
+that's been a good decision because now
+we are able to use models for their
+strengths understand what's better
+what's not what's a good fit what's not
+and um that's that's given us a lot of
+well real learning and the opportunity
+for use case teams to select from a
+repertoire of models that we are happy
+to back generally the selection factors
+as you'd imagine would be three to four
+such as what's the latency what is the
+quality of output that we seeing um how
+much time is it taking how much context
+window what is a context window size
+does the model support and perhaps most
+importantly for us what data
+classification and residency so what
+what does does the use case need can it
+actually have data traveling all the way
+to Cloud even if we not storing it if
+you're not caching it or should we use a
+nonpr model things like that but we able
+to make those selections because we've
+we we have a huge set of models that we
+can choose from so that's been in
+handy all right moving on talking about
+this I think we already got into the
+subject human in the loop extremely
+important um and I say human in the loop
+but what I really mean is the ability to
+have have something deterministic
+validate the output of the model so
+that's what we are doing at the moment
+principally we do not want endtoend
+automation that's a conscious decision
+we are going to we're going to happily
+almost revisit this decision in the
+future when we see a step change in uh
+the model's reasoning abilities but we
+don't see that yet and we find that
+there's more value in being able to use
+models in these assistive capacity as as
+opposed to Replacements to end to end
+workflow so that is what that's what
+we're doing at at this point in time the
+second thing that we are very hard at
+work doing is reading city city apis
+city documentation city services
+everything deterministic for Gen so we
+making it more ready for Gen and by that
+what I mean is that our document
+interfaces our API interfaces metadata
+documentation of these apis the way we
+think about about schemas is becoming
+more gen friendly so that if we had to
+build an endtoend process with Gen in
+the mix we could have these almost
+building blocks where gen would play a
+role the output would be validated by
+another deterministic service handed
+over to a human etc etc our
+documentation parsing um logic now
+considers gen as an active actor by that
+what I mean is we've restructured a lot
+of our documentation so that it's
+friendly of a rag it's friendly of a gen
+and we're getting better outcomes so
+that's that so it's been a step change
+in the way we think and um in the longer
+term I think when we have gen models
+that become more capable it's going to
+really help us expedite our workflow so
+that's how we're looking at it thirdly
+we and to your point s of we have a very
+we're trying to have a mature and
+tailored approach for evals because
+there's so much material there's so much
+benchmark
+so many libraries in the market but this
+is something that one has to tailor for
+one's own needs and it's not easy
+because there's no standard formula in
+fact it's so different when you think
+about code evales versus Doc evales
+versus very use case specific evales so
+we're trying to standardize that as much
+as possible that's one but more
+importantly we're trying to change the
+mindset where we we start to get our
+engineers and all of City to
+okay yeah no go for it go for
+it
+yes we use several we are experimenting
+when it comes to Li libraries you know
+so I wouldn't name any but um but what
+we've done is we've written a CLI and a
+framework from scratch and I think that
+works better for two reasons one because
+we understand it inside out second it's
+simpler and it's more scalable and it's
+fully customizable to our needs so so
+that's what we are using we can use
+weights and biases mlops anything open
+source to be able to present the
+findings of our eval runs but the Run
+itself and how we run it and what we
+look for is very custom to us so it's
+not going to be things like not only
+going to be things like correctness bias
+toxicity and the S to eight Dimensions
+that if you look at most of the
+libraries
+uh you'd find it would be more tailored
+to our own
+needs it's a good question in fact
+that's what I was going to get to next
+so with evals the the the motivation and
+the dream is that evals it needs to be
+reduced to or looked at as testing the
+way our teams don't release anything
+without good unit testing integration
+testing performance testing ET Etc I
+really want my teams across the company
+to look at evals that way if you're
+changing the version of a prompt if
+you're making a release which could be a
+fortnightly release if if there's a
+model version change minor or major I
+mean just a model version change we have
+to be able to rerun our eval suite and
+the best way to do it is not with the UI
+it has to be in the cicd pipeline so
+that's what we're doing we need these we
+need the almost the Manifest metadata to
+be checked in a centralized way to
+access it and then it just runs we use
+tecton for as a part of our cicd
+framework so just run it as one of the
+steps it must happen and then the
+results need to get pushed up to a
+central place that's not fully come
+together but that is pieces of that are
+yeah coming
+together yes
+yes so so it's very simple it used to be
+a bit more complex but we've really
+simplified it and that is be able to
+articulate your use case one is it needs
+to be clear if something is going to add
+value it needs to be expressed clearly
+in the least so there is a definition of
+why do you want to do this what value
+will it bring to the company to your
+team and how many users developers end
+users will it impact so how what is the
+impact and really what is the reach that
+is what we look at people obviously put
+in numbers as to how many X Millions
+dollars whatever it's going to save us
+but those are notional numbers as you
+imagine so it's more around being able
+to articulate value and it feeling right
+if one needs to explain it too much you
+know that something's missing
+somewhere
+H
+fa yes yes yeah yeah yeah that's a
+that's a very good point because it gets
+conflated very often we have our
+U yeah we we have our Tech strategy
+which now includes gen strategy I
+wouldn't say that we fully understand it
+but we really getting there because we
+very actively thinking about it and some
+of those things when should you use it
+when should you not when do you apply it
+versus not is is a part of
+that
+yeah yes
+yes
+just did I hear yeah go for
+it that's all right I'm happy to have
+this conversation
+here trying to draw my thoughts up okay
+uh to what extent do you think that the
+work you've done organizationally in
+terms of the use cases and the
+architecture sets you up
+for multimodal uses of the tech
+technology streaming audio both within
+the company and the ecosystem around so
+it's used for fraud and manipulation
+yeah it's a lot of what you've described
+is very very sensible the most prudent
+sensible uses of the technology yeah but
+this kind of wave of audio stuff is
+coming and so it's not going to be you
+building things it's going to you
+surviving the rise of audio Yeah fakes
+we're starting to experiment because
+that's going to be the next wave of
+interesting use cases that we already
+starting to see within the company we're
+not fully ready
+I wonder if I'm sharing too much but
+we're not fully ready from an
+infrastructure perspective there's a lot
+of infrastructure but I need to make
+sure that it's absolutely secure for it
+because when you're talking about audio
+files and videos it's a lot of data
+movement being able to protect that data
+becomes very difficult because the
+capability when I was talking about
+guardrails guardrails are great but they
+don't fully apply to video they don't
+apply to multimodal content the the way
+they do to text content so that that is
+something we need to crack once we crack
+that we've got all the models the best
+ones that perhaps will support us in
+that Journey but that is the piece that
+we're trying to crack at the
+moment good shall I move ahead um I
+think we've covered everything that we
+wanted I want to talk about in
+this thank you so this is the last one
+and a very very broad brush fun building
+intuition this has been as you'd imagine
+we've done a lot we've built a lot um
+which means we've had the opportunity to
+understand a bit more about gen and the
+gaps and where we want to invest we need
+to invest in all of those things but the
+one that I want to focus on is build
+versus buy we've known that as we mature
+our ecosystem at city it's going to be
+build and buy we would want to build the
+core components of our ecosystem and
+we'll want to supplement that with a lot
+of these wonderful vendor products
+really that are coming together it's
+incredible to see so many good ideas so
+many new companies burgeoning across the
+globe making it happen so we've known
+that we would want to definitely have
+some of these in the mix but it's not
+been a very straightforward Journey To
+be honest to make those selections
+happen and the reason for that is that
+there are lots of good products but when
+we look under the hood whil see a good
+great idea ideas they perhaps May lack
+reality and a lot of these products as
+as we've seen them they seem to be in
+their infancy first incarnations of
+great ideas which means they're not
+ready for scale they may not be ready
+for the the kind of security we need the
+latency that we expect the endtoend
+automation that we expect for these
+products come with IAC and um good
+documentation many many fronts so that's
+been quite an incredible journey and
+that's in fact led us deeper into
+building more which in my mind has been
+an absolute blessing in disguise one
+because it's fun we're really enjoying
+it but more importantly because we are
+able to now form a better understanding
+of what we need to invest in where the
+gaps lie and what should 2025 look like
+in terms of how we think about our
+ecosystem how we develop it and enrich
+it so that that's been wonderful um and
+it's really expedited our learning as
+well I think there was an offer to be
+able to talk about hiring so yes we are
+hiring there's a lot of focus on gen I'm
+hiring um across the globe really so Us
+London India several other locations so
+if I could post that somewhere or link
+to some openings I would love to be able
+to do
+that that's the end of it these are the
+distill down
+lessons thank you
+hello hello um what do you think about
+llm roning have you seen any progress in
+the past 24 months say 24 months yeah 24
+months for certain in fact even in the
+last six months um well reasoning is a
+good term um reasoning and almost
+credibility to an extent is what we've
+seen so s certain features have made it
+a bit more deterministic for us for
+example this entire concept of being
+able to use functions function calling
+Json mode practically that makes it feel
+a bit better a bit more deterministic
+and hence better to be able to bake into
+any kind of workflow so that's felt like
+a step change but going back to your
+question reasoning wise yes 24 months
+I'd say definitely um I personally
+happen to like 3.5 Sonet quite a bit and
+all all the anop IC models they are
+absolutely great 40 has been very
+interesting as well and definitely a
+step change from uh turbo so so that's
+how we see it and um I see it at least
+anthropic is just about getting enabled
+in the bank so so yes and would you
+attribute that that that performance
+jump or that progress to more data
+bigger scale or is it using the llm
+models Plus some more deterministic
+software check input outputs or is it
+that the base models themselves I think
+it's the based models themselves and
+I'll tell you why I say that practically
+there are several clis that I've written
+and several services that have written
+and the way I felt about how much it
+could do 6 months ago now switching the
+model let's say to 3.5 Sonet you totally
+get better outcomes I've written some
+agents as well that were not able to
+complete a multi step multi-agent
+Journey very nicely I shouldn't be
+naming models which ones didn't do it
+but there were some that did not even
+with very large context windows but now
+I think they can you know not the same
+ones but for example 3.5 Sonet does a
+good job of being able to do something
+not extremely complex but a decent sized
+program or whatever task I'm giving to
+it end to endend with handovers handing
+back to previous agents all of that so
+that's incredible to see so it
+definitely feels like it's headed in the
+right
+Direction go by there was a question
+here sorry um first of all just like
+genuine appreciation for sharing uh all
+of this the hacker in me loves that you
+flexible to everything you're
+experimenting with everything just
+thanks for sharing um first sort of uh
+concrete question um when you were
+saying that uh how you're helping City
+prepare for Gen you mentioned how you're
+structuring your documentation
+differently now to be more indexable for
+agents could you comment on that like
+what does that concretely mean yes I'm
+always worried about leaking any kind of
+proprietary information but generally
+speaking so we've got in fact my group
+has a lot of tech writing Focus I I like
+to have very good documentation for
+engineers and just generally clear
+documentation so for example at times in
+documentation you'll see there's
+repetition there are certain common
+aspects that get repeated and I'll take
+some examples not really Le specific to
+city but let's say the cicd section may
+need to be done the same way but it
+could be very repeated across let's say
+four to five products or n number of
+products now the way we structure
+documents the way that works better with
+Gen would be when you've got these
+almost Snippets Central sections that
+can be referenced from various documents
+or product pages so what what that leads
+to is when you're trying to have any
+form of rag on your site or your
+documents there's lesser repetition
+which means that when the llm is then
+producing final answers to a certain
+question that you've asked again there's
+lesser repetition or cleanup that needs
+to happen happen or pre or
+post-processing that needs to happen so
+that's what I mean by restructuring
+documentation one second using a lot
+more metadata because our documentation
+has well has good metadata but I think
+we could have done it better which is
+what we're doing now more tags more
+metadata more um more information on
+recency or next review date Etc anything
+that can Aid the model to pull out the
+the right subset is what we are trying
+to focus on and this has helped again
+the way images are structured in
+documentation as well to be able to
+index that better which means one you
+got to par multimodal content but then
+also have a description that is Handy to
+enrich the messaging around it is
+sometimes good so we're trying to think
+of those things and make our
+documentation
+better um thank uh second last question
+promise but um
+so sorry uh but um are you able to
+comment on uh at the current stage uh is
+your evaluation pipeline more
+qualitative or more quantitative and how
+would you expect that changes as you
+welcome multimodal models that's a very
+good question it is it
+is we I really Aspire for it to become
+more qualitative which is definitely
+difficult we moving towards that so it's
+more quantitative at this point in
+time so U I had this question so from an
+operating operating model perspective
+like people process and Technology what
+are the top one challenge or top two
+challenges so far in this journey you
+feel like from people from process and
+Technology you're going to get me in
+trouble aren't you asking me so many um
+what would you think
+technology is perhaps something that I
+think all of us love as Engineers right
+and that's something you can tame one
+way or another it's going to be the
+other two for the most part yeah so you
+see people as the most toughest thing
+there or in this
+journey well I mean you got to take
+people on a journey and that takes time
+and energy and perhaps as Engineers you
+want to invest more energy doing things
+developing things and going at pace so
+yes I would think thinking of it that
+way that is more difficult okay I'll
+stop my question I'll have oneon-one
+with you
+yeah yeah okay
+that's just sorry you did a great job by
+the way like amazing and investing on
+data preparation I think that's the best
+thing you can do because that's where
+most companies can you please talk in
+the
+mic yeah sorry um but my question was
+like uh So you you're developing mostly
+in house so you're not using something
+like AWS most most a lot of financial
+Banks and all they use AWS Bedrock or S
+so you're not using something like
+that so not not AWS Bedrock we use we
+use the vertex Suite so Google we use
+yeah so and that's a service so
+basically the vertex service which is
+managed for us so just no data residency
+which means we do not use any any data
+products we don't even use context
+caching but request response we do use
+we do not use GCS to be able to store
+our documents in cloud storage just
+again for that the same reason but we do
+use Google we do use open AI via Azure
+at this point in time
+yeah model hosting is done on Azure for
+open a models and Google of course it's
+a managed service yeah
+yeah it's a it's a complex answer to
+that so we definitely see productivity
+gains and we do think it's going to
+continue to Trend in the right direction
+as a bank you know there's there's so
+many opportunities that um that you have
+to be able to automate
+processes it's very human dependent at
+times and we can bring automation a
+different way of
+working especially for processes that
+add value but can add value in a
+different way I just automating them
+away so we see a lot of value can be
+created there at the moment if you talk
+about Roi in terms of typical Roi we are
+very aware of the fact that this is the
+point in the journey where we've got to
+invest anything that you've got to get a
+return from sometimes need needs time
+patience and investment so that is where
+we are having said that we very aware
+that we should be starting to track how
+much are we investing what are we
+expecting and how do we make that happen
+so that awareness is very much there but
+it yeah what does that translate to
+definitely I want to put this on record
+does just does not mean we'll have fewer
+people that's not the only way we are
+looking at it it's more about making
+more things happen doing things a better
+way and figuring that out so hence I say
+it's complex but um yeah early on the
+journey
+we we don't have the third speaker so we
+have some extra time for questions so
+and also we have like in the end a bit
+more time for
+discussions
+one comp
+it takes more time yeah um yes we we
+would see the same but actually I think
+strategically and principally the way we
+look at it is we do not want to automate
+away our complex tasks that perhaps are
+the most valuable tasks also so there's
+almost this Matrix if it's animportant
+task and if it's complex that's not
+something that we want to delegate away
+to Genai because that's not where we see
+value because they could be really
+critical what's the point of delegating
+away the most crit iCal thing for
+yourself you don't do that generally I
+would say the same of code I don't want
+ji to write all my code because that's
+the most fun part of doing things but
+that's what so we not we're not trying
+to attack the most complex tasks and I
+can give you another parallel not
+related to gen but relevant to bank if
+you think about embracing public
+Cloud other companies may have done it
+10 15 years ago right banks have not
+done it a decade ago but if a bank
+starts from trying to migrate it's most
+complex platform into Cloud that would
+not set them up for success and I almost
+apply that to gen hence we do not so in
+that set of the Thematic use cases that
+I was talking about it that that set was
+not in it most complex tasks because we
+would just set it up for failure that's
+how I look at it
+yeah yeah
+yeah
+yeah yeah
+yes sure yeah so uh my question is just
+reflecting back to gentleman's question
+regarding to people that you have uh you
+mentioned that it has been introduced to
+many teams across uh different
+department uh what was uh what was the
+acceptance uh across different teams so
+what was the extremely high so gen is
+not something that you need to position
+teams want to have more and more of it
+and want to participate do more and more
+of it so you don't have to Market it to
+them they want to do it and they want to
+learn and they want to almost use it in
+their day-to-day processes so the
+acceptance was really 100% we've got
+such a backlog of requests interests use
+cases that are registered for that
+reason because people see value in it
+and um yeah want to go on that Journey
+thank you my second question is uh how
+did you pilot uh like selecting subset
+of people from different uh organization
+or just filtering it's a good question
+so collectively all of us were new to
+that Journey but some some parts of the
+organization are Central and have to
+make sure that the architectures the
+designs
+the platforms are right we happen to be
+part of that which means the way we
+piloted was once selecting that that
+subset the Thematic set of use cases
+making sure as a task force we are close
+to ensuring that the designs the
+approach is right and it's not too
+difficult because you're talking about a
+dozen or a small set you can do it you
+can make sure that the themes are coming
+together the blueprints are coming
+together right things are happening and
+then it's rinse and repeat so that's how
+we went about it making sure that it is
+getting reviewed there's a guided
+process and journey for these use
+cases one last
+question that's a part of our investment
+you know that that phase of the journey
+so
+yeah um yeah sure so I also work for big
+bank at a guess how many people you
+think more people are using your tools
+officially versus the number people who
+are
+using commercial tools on the side you
+think like what's your feeling on
+because I understand your TOS prob very
+restrictive about what people can do
+with them but my experience would be a
+lot of people are probably
+officially going outside of that and
+using other geni gen tools do you have
+any feeling of how that works in City
+look at city that that path is very
+difficult yeah you're not going to be
+able to use another tool let's say open
+up a chat GPT interface and ask a
+question those Pathways will be blocked
+for you or you you would not be able to
+interact with let's say o Lama and spin
+something up so effectively you've got
+to make sure for everybody to have a
+experience you make the tools that
+you're rolling out they are their very
+best so that is how we looking at it I
+happen to come from an engineering
+background so I'm very invested in
+making that happen because we also
+consumers of the same technology so yeah
+that's how we're looking at
+it thank
+you
+excellent of
+course we have a short 3 minute break
+and then mikola will be presenting about
+llm in C generation
+the pin on your sh
+yeah a bit bit closer
+did you have
+any sorry you make a photo for me
+presenting
+so I
+ask thank you so much
+for that's a long day I don't think
+thank
+you goes to
+everyone okay with stre minutes started
+and uh voice uh uh does sound already
+turn it on or I should yeah I hear hear
+your sound it's already recorded so I'll
+just get everyone together
+sorry I forgot to ask about timeing how
+much time I have 20 around 30 minutes
+okay so let's see you talk 25 minutes
+and five minutes for questions yes good
+yes
+down thank you cool
+yes hi today I would like to talk to you
+about uh code generation and practical
+code generation does it really works or
+does it fails we will try uh in case
+anything will fail I have copyed file so
+you can see and see how it works
+so what we can do we can do practical
+session for code generation and uh about
+myself super short I'm rbe engineer here
+at Auditorium it's a small educational
+startup I have more than 15 years of
+software engineering experience had a
+lot of bunch of techologies worked with
+from Front End backend system
+administration a lot of so now I
+focusing fully with uh llms what we will
+use we will use uh approach which I can
+recommend you to use for your daily
+development for simple features or more
+complex if you have enough money to put
+everything into
+context uh selfhosted gradio version
+gradio chart is very interesting thing
+which helps you
+to use just one small
+file and have a nice
+API this is API which you can use so uh
+I created a
+special system prompt
+uh don't worry you can find later it in
+repository it's very long one so
+basically it's chain of thoughts and a
+lot of things added into it to be like
+super nice super good you know this kind
+of languages this kind of Technologies
+uh be careful when you do it and blah
+blah blah blah I spent like several days
+to craft it so or a bit less actually I
+don't remember so a bit shorter so
+you'll set up how it will react actually
+system proms it's very important because
+if you use just orinal your helper your
+grateful agent you will get some
+different results on different
+level next one uh we can I would like to
+show you a small D how to build the
+calculator uh The Prompt which I would
+like to do is create calculator and make
+it work
+oh dramatic
+P yeah something we have let's review it
+so understood I will assist you on
+focusing on doing these things and uh
+create so we have several
+steps 1 2 3 4 five okay this session is
+very nice I create I can show you
+previous session which was much better
+in review so uh we have output which
+tells that we can create calculator and
+uh what we need to do for
+this uh
+run the application create react next
+application create several
+files copy them then update page main
+page to it and then add some basic
+starting then you just import files and
+everything
+works
+cool let's see if it really
+works uh this is our application which
+we
+have uh the problem was that I created
+it with a
+standard
+uh standard super
+standard review and it has as you can
+see
+let's go back to slides so step
+one uh setup project create calculation
+component update main page at basic
+styling import SS file setup project it
+works with njs just empty project it's
+it will work
+always then I added comp calculator JS
+file which you can see here is uh
+added here but the problem our
+repository does not have
+uh page index.js because because I used
+typescript when I uh created react uh
+application and this is a
+problem
+uh the problem is that we don't have it
+we don't have page uh uh this file
+what we can do we can ask uh I use
+typescript please uh and there is no
+file index GS and here's my current
+prompt
+okay uh how we can pass here the whole
+project which we
+have can you tell
+me how we can pass project which we
+currently have into our repos into
+prompt we can like make what we do oh
+copy file copy file past it here
+and all files this is actually really
+long I prefer better and uh much more
+interesting
+way uh we can use uh
+terminal um so can you make the screen
+screen larger because we don't really
+see much or you just say in in yes so I
+created a special helper Library which
+uh helps you to compact all your
+projects into one
+file so all content of your project
+let's see
+it so it uh basically what does it do
+it's uh compose every file which you
+have into
+a it provides directory structure so our
+library our LM client can use it it
+gives you files which you have here and
+their content one by
+one does it matter
+on sorry does the ordering matter uh yes
+I pref I try it matter and it always
+stable EXA uh for my library which I
+created it's stable so I spent several
+weeks to improving it slowly but by the
+way yes so you're going to copy this
+into the
+UI this yes I okay
+so you know teral is always open I
+pr
+I you know
+just do
+for such such a UI yes uh you can do
+this uh the problem is uh our when you
+interact with LM for coding you read a
+loot you copy something and you copy uh
+your output into the uh you don't know
+exactly what uh The Prompt which you
+craft you want to craft it f as fast as
+possible and uh here is my project so I
+just
+crafted and I
+see I forgot one thing to add here uh
+where is here's my C yeah I use TP
+script here's my current project so uh
+we'll ask LM to improve the output okay
+I I can give you to the I I
+don't I some point
+CR oh
+llm Crush like
+know like copy paste
+memory the context window as well yes
+context window is huge but you don't
+need to pass everything you need to pass
+part of your project you need to pass
+controllers deal uh folder or folder for
+your migrations database migrations if
+you do it this is like second stage of
+uh what need to be done because when you
+have a huge project for million lines
+you cannot copy everything you have to
+cut uh you have to just take output for
+your representation of your architecture
+like main files this you can do as
+initial part for project like my
+controllers usual methods API and adds
+but this is like more different talk uh
+my talk is very
+simple your code is extracting structure
+of
+your is that it for uh no it's copy
+paste because uh I did a lot of things
+and uh I created pipeline which read
+which uh have a loop when you do changes
+you pass into llm llm provides you
+output with in Json in files you can
+update them but every time you get a
+response from LM you have to verify it
+and see like every time you get
+something from LM you have to do a PR
+actually this is what you get and for PR
+review it's better to do it in UI like I
+use uh GitHub UI very good and uh intell
+ID UI for reviewing the two best visual
+tools
+so uh the very good thing which gradio
+provides you is also have a copy paste
+actions so you can copy files I don't
+know what happens here but not
+everything works is expected
+so
+um we see that it tells that
+uh the long output it breaks
+it okay so from previous sessions output
+so thank you for providing current
+structur project and files I see using
+typ script and uh we need to make some
+updates into calculator component so it
+gives you nice out for
+calculator and updates to main page so
+page txt we don't have
+index
+file Let's
+uh check out
+here so we have pushed updates to page
+txt which was provided by LM and layout
+txt which allowed us
+to import F Styles and react
+components
+so the good part of this you can use
+Library if you want you can download it
+it's open for
+everyone uh one important thing when you
+compose your prompt when you compose
+your directory if you do for example
+just archiving it as uh with zero with
+star and put it as single file you will
+put everything include system folder
+like SN models do nets you don't want
+this you want to cut out as much as
+possible uh I did a simple filtering for
+folders it's uh you can adjust
+to your needs and current current setups
+are usually fine and also another
+important things when you work with your
+repository you sometimes have St
+environment files with passwords you
+don't want at any condition them to leak
+into the LMS API at as far it's your own
+API so one additional feature is for
+password filtering so it scans all input
+if it finds password it replace it with
+uh replace it password one 2 three
+so uh now we got the response where LM
+tells yes we can fix it change these
+files but when I run it we get a
+problem U let's try
+what you
+work no
+way and idea why don't you look at
+what's in getting directly and just fil
+out those if you look at getting have
+like all your password files and other
+files that you don't want LM to know
+about so that could be an
+automatic yes I created special file
+passwords for you add all your password
+which you want to filter out because uh
+passwords can be super random you cannot
+detect it from repit
+have yes you have G ignore but this
+Library doesn't use G
+ignore you do any ranking so when you
+selecting the text you rank the output
+right so you can re rank it in the
+form you can say heym give me the best
+yes when you do next you can
+uh so there was an issue with
+code let's check out that verion no was
+fixed please
+break it's it's not D if it doesn't
+breaks just to ask so what you're trying
+to run now is the code that you buil by
+using yes only that
+good
+oh and just to recap so what you said is
+that you use the AI to build the code
+but then you put it in your editor you
+riew it manually and you compile it yes
+uh okay let's go to latest ver because
+it's uh calculator I can simulate that
+error
+fresh oh
+no uh there was error when I building
+the Cod and the error was that
+calculator TT has was built for Server
+components but uh it was trying to do it
+on front
+and you have uh okay you use State use
+state is not allowed for sver side
+components and you have to fix it I did
+this small fix and other fixes and
+uh is that the stoas nature of the llm
+sorry how many times have you tried
+running that it could be just random
+that it got it right that time oh you
+can get the question is of your um how
+good your promps are and
+uh like you get mostly stable results
+so this is
+reality
+no okay this
+is calculator CSS F okay let's check out
+the latest version
+I don't
+know uh yes it's connected to the cloud
+CL which which L uh Cloud Sonet
+3.5 I think
+it's broken yes so okay it's broken but
+uh let's uh do one thing I think we
+should save my
+demo no
+yes and does the llm sees the git files
+or or it only sees the input no I LM see
+only what you put into the llm into Pro
+yes
+yes so it's build the calculator the
+code is in
+repository and uh as you can see it
+works what you we we want to test it
+maybe uh which let's make it uh
+on we don't have square root prom for
+so divide by zero was was proposed as
+improval
+my sorry uh
+1,000 plus 2,000
+to 3,002
+divide by seven I never tried
+divide okay uh but what we can see here
+button layout is uh kind of strange
+designer design requires improvements
+and we have zero test here so actually I
+don't know if it
+works uh yes so I test it it looks like
+it works we can divide by zero
+to clear yeah it's Infinity cool it it
+didn't
+break uh let's see if I really hardcoded
+it uh we can open
+the
+directory
+Cloud C free here
+[Music]
+components I don't see any hard code
+here it just clear
+divide
+so uh what you can have uh I uh pushed
+this thing into the
+repository uh calculator example you can
+download it you can see whole prompt log
+for the prompt session Cloud session and
+uh to see everything was which was
+included also Cloud
+chat interface you can get it here run
+it locally just don't forget to set up
+environment variable entropic
+key prompt Library uh the prompts which
+I
+crafted web prompt system developer
+prompt when you want to do some
+theb web coding St prom the good one
+like uh a lot of
+iterations also dump of current project
+which was done
+here uh so you can get
+this cost was just yeah I will do it oh
+don't worry cost was just 10 cents
+because it was very short and actually I
+got like from the first attempt the nice
+result for the for calculator there was
+just several
+issues one major issue I got G I created
+typescript repo but it was about CL
+initially proposed it to me to use
+JavaScript files which didn't work uh
+sorry before we counts the question I
+want to mention could you just try one
+more thing like could you try square
+root of minus one sorry square root of
+minus
+one we don't have square roots oh you
+don't have square roots
+we
+can
+2+
+2 divide it
+to
+we why 2 + two no no no uh this
+calculator executes on every operation
+so you don't have the
+oh it doesn't do
+associate yes it's super simple
+uh yeah uh one important thing cloud has
+very huge difference between uh with
+Char GPT and open AI open a has a cut
+off for half year now and actually it
+feels longer so every new API which is
+comes out you don't have this knowledge
+inside uh chpt so you can get outdated
+code being generated when with clo you
+have code which is up to date for the
+reasoning things like if you have
+something complex problem you tell us oh
+this is my answerable config it doesn't
+Works tell me why
+uh both do nice clo sometimes provide
+better result but you get a cut off for
+usage very low very low limit for daily
+usage in charge PT I super rarely face
+daily limit so this is like
+important
+questions what was difficult in building
+the prom for you for getting to get you
+the right
+answers
+uh the difficulties first uh when I
+started to use LMS I use just ch GPT
+then I used open a API for basically API
+to J GPT and composing proms I did a lot
+of files which were fetching files
+crafting them into one and sending and
+then getting back uh as I mentioned
+every time you need to make a review
+otherwise you get into Loop you spend
+all your money spend 5 10 20 $100 on the
+loop and you don't get the results and
+uh if you get something which broken in
+console it's uh usually for you easier
+to cut that part because you can get uh
+like output for thousands lines 100
+thousands lines of code broken if
+something the loop you need just to put
+past part of it uh second important part
+with clo when you have this session
+every time you sent all your chat
+history is being sent as it so every new
+message adds to previous message so your
+lock or uh context Windows run can be H
+exhausted first and you spend much more
+money so start new session when you do
+it especially VI are uh using like API
+and you have high limit if you use chat
+uh window you are not that uh bad in bad
+situation but you will exhust your daily
+limit for
+usage other part was like uh as I
+mentioned
+passwords I was very very it was pretty
+boring for me to cut out passwords for
+things which have been store stored and
+you don't want to lose it anyway so you
+spend it time and automating just this
+simple pass part of copying everything
+into one SLE dump it really
+helps so the passwords are cut out by an
+llm or is it like just a script that
+it's a script I can show you the
+library The Prompt Library you have
+here password example so you create list
+of your passwords which you have in your
+directory catch them all and uh
+after uh you set them you set uh command
+PC is uh content uh dump content content
+without password filtering PCS is dump
+content with password
+filtering uh sanitized output I always
+use saniti it
+output and uh then you get your response
+we can
+actually see how it's been
+used uh
+oh not cut sorry
+weim okay super simple directory listing
+file
+content what you have and uh the
+libraries and you can use it to just
+tell me oh let's improve this or
+that for our calculator
+example we want
+order of
+buttons the current project sorry T txt
+describes your project txt I made it to
+make it readible because uh you can have
+folders you can have different type of
+files if you don't know if you don't
+have extension it's hard for your mind
+to see is it folder or is it just text
+file because basically it's a text file
+it's a dump
+yes and are there any other questions by
+the
+way
+um do you do anything to check for
+security vulnerabilities in the code
+that it
+returns
+PR or never ever trust it can it have
+super high confidence on providing you
+output out could have absolutely
+different you can get results like oh I
+cannot access to Port course are bad I
+can set it up it will tell you how to
+disable course it will disable it will
+work or I can access to database uh IP
+addresses it will tell you okay let's
+open database access and it will open it
+for o IP
+addresses
+so but you can ask does this code has
+vulnerabilities and uh
+this is
+current
+project at
+square roots but uh operation let's
+try so uh the instruction on the bottom
+was just for the llm to square root
+operation
+this I don't
+know uh usually request T like 20 to 30
+seconds uh when it was running something
+locally it was able to to run like 60
+seconds
+okay export square
+root Let's
+see we have uh so this time I have very
+bad luck with formatting but uh yes it
+tells let's implement this change square
+root
+calculations and
+uh looks like it's not full output
+h
+no uh expected comma I missed something
+in the
+yeah it's finally
+failing not like trivial output doesn't
+work this session
+unfortunately let
+see
+no let's try to find the
+by the way anyone has one more question
+until uh it's being
+debugged let's see if the square we
+go yeah export default calculator for
+so what this is actually the application
+in use and it there is a still a lot of
+debugging in the process yes uh you
+absolutely right there is a lot of
+debugging and
+so where do you think you would improve
+this The Next Step the is to build it
+for
+automated but you need
+the uh you need to be able to run
+it yes I use it constantly
+s sorry which one GI
+[Music]
+uh I can tell you that GitHub which you
+have in
+the uh Enterprise version is actually so
+no square root cannot be added it's
+failed uh so GitHub and compound
+Enterprise version been fine tuned on
+your code base and actually I got very
+nice feeling when it was enabled uh
+because before it was like starting and
+having providing
+like very bad result not usable at all
+and like in three months I got like
+immediate feelings that could become uh
+exceptionally useful for what you really
+want to get because uh it's
+uh it started to really show the normal
+code provide nice of completion which
+are which were in line of our code
+base and when you use it as a private
+version as a as private account and
+account it's a different things it's
+really
+better uh yeah it's better because it's
+fine tuned on your
+codebase but generally it's uh good in
+generating
+tests uh good in super small fixes good
+as long TP when you autocomplete it but
+it's bad when you try to ask him to do
+something complex it's it cannot do
+it oh maybe I have not used it cannot
+tell okay
+uh any other
+questions have you tried um
+I tried previous things like GPT
+engineer or way stuck in the loop if you
+ask to do something more
+complex so basically I use this part as
+to develop something to get the initial
+impression how something new should be
+built you don't know this you read
+documentation for every feature you use
+and then you can understand if it's okay
+or not only this moment to get results
+uh for UI it's fine for backend it's
+also fine but you have to know which
+libraries you use because uh we can have
+usually you have very complex Li Library
+hidden on they very simple interface
+which you have to
+understand good thank
+you I think it's it's very difficult to
+do
+shipping uh uh and uh interacting with
+uh uh models is that there's no good way
+to check if the models are actually
+working uh in my opinion everyone uh uh
+everyone is still testing the waters and
+trying to see uh if we can actually put
+uh put uh put this out uh in the world
+and in my opinion a very vague uh a very
+good way to do that is to quickly try uh
+a lot of things and if you don't want to
+depend on like one giant monolith like I
+don't know uh open a um um uh Google and
+whatnot you need to experiment with
+local models um so after like saying bad
+things about big companies oh oops
+okay can I change slides from here cool
+I can um I am a Google developer uh uh
+uh expert in machine learning that um uh
+that's why you'll you'll see the name uh
+but I also used to do kaggle once in a
+past life currently I work at a Swiss
+startup called lightly uh AI weell data
+labeling as a service but backed by sort
+of uh smarter deep learning was
+particularly Active Learning and self
+and self supervised learning before that
+I deployed graph rag llms before like
+the rag word was a thing uh
+interestingly we deployed these things
+on VR headsets so extreme like CPU uh uh
+uh inference as well and before that for
+about like one one and a half years I
+used to work at weights and bces uh I
+was on the growth team I made all sorts
+of like uh uh developer content I'm
+based out of uh Manchester at the moment
+uh yeah some notes before we start
+please engage dur uh dur during the talk
+this was originally meant for like a
+longer I know 45 60 Minute tutorial
+since we only have uh 30 minute U um uh
+please ask questions in the middle
+pertaining to the topic of course uh
+slides are available on my website in
+case you want them uh beforehand I'm
+lucky enough to have like a unique name
+so if you just look me up my website
+should pop up somewhere uh and yeah uh
+after the session please feel free to
+ask like off topic uh questions as well
+so um this is funny uh uh actually but
+traditional uh uh llms
+involved pre-training and fine tuning uh
+I got into to uh ml before sort of uh
+Transformers were a thing so I remember
+the days when uh everyone was training
+their own um uh uh models this is of
+course ancient knowledge these days um
+the rag workflow is um so um giant
+corporates make uh uh uh models and
+release them nowadays trained on both
+sort of uh web corpora and also uh
+synthetic data then uh all of us try to
+use our custom uh um knowledge bases and
+make some uh something actually tangible
+for um uh
+users also like before I start um let's
+think of like a good way to eliminate
+how many of you consider yourself as
+like technical AI uh uh Engineers I use
+less jargon that
+way okay so from where I see it's like a
+40% technical
+uh audience who I'll try to use like
+less
+Jons but I hope everyone can agree with
+the fact that all of us are like trying
+to build something with uh llms trying
+be the keyword here if some of you think
+that you have successfully deployed uh
+llms in your own use cases please uh uh
+have a chat with me um uh uh afterwards
+but yeah most of these use cases revolve
+around either processing uh uh
+unstructured
+uh um uh data formats if you look at
+this Summer's uh YC portfolio almost
+half of the companies are trying to make
+sense of uh PDFs I don't know um YouTube
+uh uh videos law books and whatnot the
+other half are trying to build sort of
+uh customer support uh QA boards and
+then of course there are like bigger
+companies trying to build conversational
+uh uh agency of startups like uh
+anthropic CLA and whatnot there's like a
+little star there on workflow um uh
+automation I have lately seen some
+people trying to actually ship uh AI
+agents out in the real world to automate
+things if you have one uh uh one of
+those please let's talk uh but uh over
+the years we have seen uh a sort of uh
+Evolution from one sh prompting that's I
+know the typical chat GPT um uh uh use
+case to few short uh uh examples so
+that's when within the prompt uh uh
+itself you're saying I Know sample input
+one sample output two sample uh uh input
+two and like uh U here is what my uh uh
+actual prompt is and then lately so
+Vector augmented uh uh inference so uh
+Vector databases multimodal um uh uh
+embeddings and whatnot um the last AI
+engineer talk by Lama
+uh uh index mentioned the word agentic
+workflows uh so that's going Beyond
+summarization and sort of focusing more
+on performing actual real life tasks
+this is where I believe the key sort of
+um Power behind uh uh llm lies but do
+people actually use it who
+knows uh cool so a quick uh rag primer
+uh new M same task uh did someone get
+that reference no nerds here okay I
+heard a laugh okay so okay cool so
+um
+um assuming you have your um your own C
+Uh custom um knowledge bases in some
+format the key four steps are so you
+index your um your data sets to create
+uh embeddings you store them so you
+don't need to index them again you query
+them that's the main
+uh uh llm bit and the actual key use
+case in deploying these things is
+evaluation uh that's where like most of
+the sort of quote unquote real work uh
+uh in rag uh is happening these
+days uh but again passing retrieval quer
+uh um quering these are old sort of well
+studied Concepts in uh NLP I come from a
+family of uh uh academics my parents
+studied uh
+uh these things in The Bachelors in the'
+70s as well so these are like very
+well-known things um the key novelty
+behind this whole uh uh uh rag thing is
+the use of uh llms to actually do um uh
+quing before this you had to handcraft
+your own features your own uh heuristics
+but with uh llms we can uh alleviate
+that need and hopefully just like run uh
+uh inference on whatever you want but
+like this comes with the drawback of
+having to like really uh evaluate your
+models and this is like uh something
+will um uh discuss as well so again
+three things uh that uh I had mentioned
+in uh different colas as well so rapid
+prototyping and local models like let's
+dive into each of these three things in
+uh detail as well so just don't try to
+reinvent the wheel just like Leverage
+open source I still come across some
+people who have spent like most of their
+uh life in sort of quote unquote uh uh
+corporate word and they don't trust uh
+open source yet F the F the future of AI
+is definitely uh open source so just
+please try and uh uh leverage as many
+open source um libraries uh as you can
+some of my favorite ones for uh
+ingestion particularly is uh llama index
+and uh unstructured uh IO for uh
+indexing you you can use a bunch of them
+uh llm Ops question mark have we
+actually accepted that word or not I am
+particularly biased to use uh vits and
+B's uh own VI uh offering as a ex uh
+employee but if you know of yep
+sure
+uhh
+uh I have no clue uh uh so L uh llm Ops
+uh from what uh I can tell is a subset
+of mlops focusing on how to use uh L uh
+llms so it just the same thing as mlops
+tries to do but focused on
+llms um so I know uh for mlops
+particularly let's see there's
+experiment tracking uh in llms you're
+not when you use l llms you're not
+usually training your own models you're
+just using them for inference so the the
+the same sort of parallel for training
+is llm tracing so that is um given a
+query what output do you get right or
+there could be data drift monitoring so
+how does your actual text uh text COA
+change over time and do you need to use
+different sort of chunking um uh uh
+strategies I've I've also seen stuff
+like uh llm routers come up so which
+sort of backend uh llm model to use if
+that
+helps y the artifacts are usually
+different the artifacts are usually
+prompts in the case of llms and models
+in the case of mlops I mean the same
+tools are used like you could use ml
+flow for tracking llm Ops stuff as well
+so you could use the same tools for both
+um I think I saw one more hand come up
+uh yeah I think in the pre LM era a lot
+of the times in an operational
+environment you can keep all the ml
+stuff away you do the work in in advance
+and pre-compute things with llms it's so
+tempting to do something at runtime then
+you've got this huge context
+increasingly big context to pass it
+which gives operational Engineers a lot
+of a lot of headaches thank you for uh
+bringing that
+up I think you have
+one yeah I think he answered so it's
+like mlops is like more predictive way
+of doing what we done earlier like llm
+Ops most used in a very advanced level
+of setup I seen uh it's still in early
+stage like you use for fine tune and
+prompting then you put it in a like a
+devop cycle like mlop cycle and you
+inject it to llm so that's a cycle we
+try to how do we so there's a difference
+between how do we do devops if most of
+them know the similar way we use mlops
+and similar way the end point of of each
+thing is different in LL llm Ops it's
+most llm mlops is like most like we
+creating a machine learning model where
+the artifacts will inject into then
+devops we have this kubernetes and
+continuous where we get the artifacts
+it's a kind of we have to correlate the
+things so it's much more easier I just
+want to add the note for you
+yeah thank you and also thank you for uh
+uh asking the the question as well I'm
+sorry if I missed like a question uh
+earlier I'll try to look more do you
+have a question sir do you have a
+question okay no sorry um but yeah um
+cool uh so
+um if you quickly want to iterate
+building rag uh uh application some uh
+uh something which I noticed when uh I
+was uh uh uh building them was caching
+becomes very uh important I put cash in
+quotes here because uh it's not in like
+the traditional uh computer science
+sense by caching I mean like just like
+storing as many artifacts as you can in
+most cases after you have generated s
+sort of your uh index or your vector
+database you won't need to generate them
+again so you don't need to like every
+time just create the uh index again just
+create one write it to uh uh memory
+store it in Cloud uh uh uh uh whatever
+but like cache all of your sort of quote
+unquote uh uh artifacts that that you
+have uh as rightly um mentioned so uh
+one particular INF cycle uh in uh
+involves a bunch of things and it's uh a
+very good uh good thing to uh what a
+good thing to do is just try to track
+like what each step takes um if people
+are not familiar with this this is uh
+weights and bies we've not sponsored uh
+yeah so one one query uh took 12 seconds
+uh in which like 2 seconds was just like
+retrieving some uh uh something from the
+the database and the next 7 Seconds was
+just uh sending it up to uh anthropic
+server and like uh getting a request
+back so if you sort of like profile
+every step this way you can know like uh
+which part of of your pipeline is
+actually slow and then you can sort of
+um uh itate um U better on top of it um
+the retrieving case in most uh uh cases
+can be solved by again using some sort
+of fancy uh caching um uh techniqu so
+again just re uh saying it again profile
+your workflow try to figure out like in
+one entire call um what the slow aspects
+are cuz uh as uh as H you 12 seconds
+just not acceptable uh amount for any
+sort of app like you won't wait 12
+seconds to hear back from I know uh uh
+uh charp or um uh uh or Cloud um know
+your data and which Vector database to
+use for it um I used to work at a
+startup where we had to work with um
+medical knowledge crafts which had text
+at their nodes so just using like a
+simple a list based Vector uh uh index
+was not good and like after three three
+months we had to like get rid of uh uh
+everything and build something uh uh
+again so try to figure out what your
+data is and what you need from it in
+most cases like a simple sort of uh uh
+list view should work I know if you're
+working with uh PDFs websites mostly um
+um uh lists are enough but if you have
+any sort of other geometry or structure
+to it use the um uh appropriate um uh uh
+database the best reference that I know
+of is uh llama indexes documentation of
+vector DB they um they lay out like uh
+which database type to use for um which
+um source and again make sure your data
+inje pipeline is flexible over the past
+year alone I've seen people go
+from um PDF based workflows to now lamap
+pars uh is a thing to now like uh
+uh uh data privacy is a thing again
+after 3 months you you might want to
+shift from like a list based View to a I
+don't know um um a map based view so
+like just make sure the data pipeline
+that you are making is flexible uh
+enough for you to um uh it uh iterate on
+later
+um prototyping bit in my humble uh uh
+opinion if you quickly want to build
+some something and showcase it to your
+um I know uh manager the best way to do
+it is use Lama uh index for ingestion
+use some sort of API based uh inference
+either um I think anthropic has one at
+this point and like in case you uh you
+want to build like a web UI for it you
+you can use like streamlet or radio um
+start very small and then tune for your
+needs it's very easy to sort of uh over
+engineer uh everything and try to stay
+uh and try to have like a agentic
+workflow in the first place but uh even
+if you like build a simple Pipeline and
+then check the times again for most
+cases it might be more than like uh 10
+seconds per uh inference call Char GPD
+is fast because it's backed by like huge
+GPU uh uh compute even at uh inference
+time you probably won't have that so
+just start small
+um and then uh uh uh try to uh uh
+improve on top of it from what I have
+experimented with just using raw data
+works very fine by raw I mean just like
+no chunking no
+sentence uh uh passing just just um in
+just the whole PDF and it should work
+fine I'll showcase um sort of um a demo
+as well which just shows like a like a
+robw PDF works well and depending on
+your use case again you might have to
+look into uh splitting and chunking but
+for most use cases it will work fine um
+I saw this on Twitter some some
+somewhere what you're building is in
+most cases unique but also mostly
+similar so uh this is just like the the
+8020 rule 80% of all pipelines will be
+the same but the key difference will be
+in those 20% so just use a template uh
+from uh I know um maybe um llama uh
+index or uh axol right and then just
+like try to find you it to your own
+needs uh you will most likely build
+something different therefore sharing
+ideas is important uh I've seen a a lot
+of people create hype about what they're
+building but not actually share ideas
+you can share ideas without revealing
+your uh IP just like helps uh uh
+everyone as well again the no free lunch
+theorem still exists so there will be
+like there is no single learning
+algorithm which works for uh everything
+you will have to find U uh uh fine tune
+uh and change things lastly I want to
+touch on evaluation so you need to know
+what your metric is most
+industrial metrics don't correlate with
+u sort of real world uh data I'm not
+sure if you C about the whole
+bm25 um drama or not but all of your
+metrics uh will be different you can't
+just simply use like I know uh an
+off-the-shelf um metric you you will
+need to create a metric of your own
+which is valuable to your own company to
+your own kpis learn to make one and then
+uh monitor that over um uh the data
+drift uh lastly local mod I quickly want
+to touch on this when I initially
+submitted the the talk I had very strong
+sort of uh opinions about only using
+local models but I don't know I work on
+a 2020 M1 MacBook Pro 8 GB Ram I can't
+do much uh so uh my thoughts have
+changed uh uh over the past few weeks
+but like the key motivation uh vs would
+be all the prompts live on your own
+servers if you're using uh local models
+Char GPT like uh By Now default uses
+your own uh your given uh input for
+training as well so if that is a concern
+you might want to use um local mod
+models uh the infrastructure lies in
+your hands uh you can spin up as many
+gpus uh as you want if you want to run
+on PR CPUs you can do as many CES uh uh
+as you want also the pricing is then in
+your own
+hands um this is again coming back to
+the monolith Point um open AI might
+decide to uh change pricing whenever
+they uh they want they might charge
+differently for uh images and text so if
+you choose to go local uh the pricing
+remains uh in your hands how to do it we
+have our friends at uh hugging phas with
+the world largest um uh model Hub out
+there local doesn't always mean bad um
+there's
+a great work being done by um unslot in
+creating sort of extremely nice even
+like 4bit um uh quantized U models which
+run like 60% faster and take up like 70%
+less um memory so local doesn't always
+mean
+bad um yeah let's go over like some
+naive rag uh examples when I say naive
+these these are like extremely simple
+textbook
+uh uh examples and if we have time uh I
+would like to Showcase like a real demo
+as well uh but yeah firstly like I like
+dinosaurs a lot so uh an idea that I had
+was uh what if I have any questions
+about the original Jurassic Park movie
+right so someone was nice uh uh enough
+to post the actual script online
+so uh you can use uh one of the readers
+from uh Lama uh uh index to just read
+the whole script this is just raw
+information in type font right and um
+this will uh uh hopefully uh help with
+uh what I said uh uh earlier that in
+most cases raw dat uh uh uh data should
+work fine in case the font uh is not
+readable again slides are there um uh on
+my um
+um website but yeah so three lines of
+code to like actually ingest everything
+then um you can choose like across a
+bunch of uh Vector databases based in my
+uh experiments just like the default one
+offered by um uh Lama index is uh is
+nice uh a side note on what I said on
+caching so once you create your index
+this is a time-taking process by the way
+you can just like write it to disk save
+it on cloud and next time when you want
+to use it you can simply either download
+it or load it
+from um um memory again and then yep
+sure five more minutes okay cool um so
+um this is like a local model uh example
+but again you can use any model from uh
+uh hugging face within a llama index uh
+pipeline you can pass in as many uh
+options as many configurations uh as you
+want uh you can provide uh templates as
+well uh I believe the example that I'm
+showing you right now is Lama 2 and the
+question that I asked is are
+Velociraptors pack Hunters if you have
+seen the movie you know the answer is
+yes and this is the same slide as before
+it says yes Velociraptors are back
+Hunters so it was able to read I don't
+know like a 500 page uh movie script and
+like um uh extract that uh information
+again it took 12 seconds so there's a
+lot to improve here mostly it's slow
+because of the inference call uh it's
+hidden but uh it took like 7 Seconds to
+actually run the query and this is why I
+have mixed feelings about local mod
+models uh all the the papers will show
+that I know we have such fast uh
+inference rates but that's on like 8 H1
+100s I don't have that I have like a 8
+gab uh M1 um MacBook be um I also like w
+be we uh so another idea that I had was
+to create um a documentation bot of my
+own so uh they have their own website
+with the documentation on it so instead
+of scraping the actual website what I
+thought I would do is I I'd clone the
+repository
+itself um Point uh a reader to their
+docs directory and just read all the
+markdown files U so yeah again like
+similar like three four lines of code uh
+in uh for this I used uh anthropic and
+then I asked like what what python uh
+version does weave require and boom it's
+3.9 this information is actually not on
+their site you can go on uh we
+documentation and uh and search it so
+I'm assuming it read it from like um
+somewhere U within the docs I also like
+to try to keep up with AI this is
+something I shipped an hour a uh ago I'm
+calling it The Daily paper CLI so if you
+guys know uh AK from hugging face he
+recommends sort of like uh 10 11 papers
+uh every day so this is like a CLI board
+that I built so um you can run the CLI
+it'll tell you like um the eight nine uh
+uh papers that uh hugging face
+recommends you read and then if you want
+the summary of a of a particular paper
+you can tell it which ID you want and
+then it'll use anthropic by default um
+to uh uh sort of so it downloads the
+whole paper ingests it sends it to uh
+anthropic to generate a summary and then
+get the query back uh and then if you
+have any questions about the paper as
+well you can just press yes and that
+lands you in a a chatbot environment
+within the CLI as well and again I
+shipped this an hour ago I built this in
+three hours so it is still quite hacky
+you can install it from
+PPI if you want just pip install daily
+hyphen papers or underscore it's one uh
+it's one of those uh but yeah uh I will
+release like um a hugging face space for
+it as well so again if you daily want to
+uh read stuff you can do that I believe
+we are out out of time so if you have
+any questions please thank
+you uh which I it's different for uh all
+three but by by default I just stick to
+llama indexes Vector but in case uh so
+my friends at uh V and uh uh uh biases
+they have their own documentation bot
+called wbot and they use chroma DB I've
+not seen a lot of people use it but they
+get like great performance from it so
+yeah not my recommendation but um what
+could be the use case for this like why
+someone will be using this what is the
+typical workable use case
+what you showing like local Lama or
+local uh gbt or whatever you so what
+could be the use case that why someone
+should uh use that you think the best
+thing that I can think of is that it's a
+starting point to then develop agent
+Tech workflows I have always felt that
+rag is a hacky solution it's just like
+one of the ways that uh we have figured
+out how to use uh our own uh uh data in
+conjunction with llms but if you're
+talking about like a pure rag based
+workflow so no uh agents just rag in my
+opal it'll just be limited to
+summarization I think that's the only
+only task that we can solve quite well
+using ply
+ranks hi um is it possible to get your
+presentation to test your code um yeah
+of course so uh the slides are on my
+website if if you want each code in
+particular it's not Linked In the slides
+however
+uh daily papers is on our own repository
+uh the the the Jurassic Park use case is
+available on VES and bces as a blog post
+and uh the we example is on my own
+notebooks depository so it's there if
+you want it uh if you want each
+particular code just like DM me or meet
+me after the talk I'll let you know
+which one it is also we will be sharing
+talkers talkers presentations on the
+select Channel
+after uh he had a question
+is thanks have you looked at all at
+using SQL databases in a rag context
+where the llm is writing the SQL yep
+teach it SCH and so on wait where the
+llm is writing the SQL yeah or plugging
+stuff into SQL templates ah okay I have
+not worked with those but I have read
+about them I was going to intern at a
+company which just did that
+um my own personal thoughts it's still
+hacky I don't see how a client would
+ever want to do that that is too risky
+but yeah sure it could be
+done not a satisfying answer but sorry
+yeah that's all I last
+question to to sort of answer his
+question I have uh I've used like agents
+and llms with um SQL Rag and like he
+said it is a little hacky but a solution
+to that is just uh writing your own SQL
+queries uh as Tools in in either Lang
+chain or Lang graph for example so
+basically you'll provide it the uh SQL
+code that you're running uh what will
+change is just the query
+values yeah
+yeah uh yeah I mean I specifically used
+it for a use case where uh I was adding
+for example bookings to a to an SQL
+table U I'm I'm not talking about
+semantic search here
+yeah
+yeah the questions thank
+you thank you uh again I came up with it
+last weekend and the only reason I
+published the package was I was pretty
+sure if I didn't publish it someone
+would claim the package name on on pipia
+so I just published it there and then
+yeah thank you thank you it was a
+interesting talk and I enjoyed
+it we have a few minutes break until the
+next speaker is setting up so you can uh
+have some refreshments on the left and
+uh go to the
+bathroom
+e
+e
+e
+e
+e
+e e
+hello um please start coming back please
+start coming
+back last time we
+do you want to use this or you want to
+use the thing this is fine yeah okay I
+just yes it's already turned on you just
+talk close to it I will is this audible
+yeah Lou
+now be on myself
+I'm done it
+something before you start just let me
+know when you're going you mean to yeah
+yeah need to let everyone know about
+sckers can't take because we left some
+stickers in the chairs and the one I'll
+hand it over
+to so our next speaker is uh P join from
+uh City BN um yes please hi everyone if
+he can have your
+attention hi everyone just one quick
+notice uh we left some stickers in the
+chairs feel free to take them home if
+you want to uh you can actually take
+them
+home hi everyone good evening I hope I'm
+audible great it's great to be here
+talking about our generative AI journey
+to make it real for our Enterprise and
+at scale so I'm pile I look after
+engineering and platforms for City Bank
+my remate is simple to modernize the
+Bank inside out and I that takes a lot
+of doing my team is responsible for
+building the core platforms some of the
+core platforms I should say that the
+bank runs on including the generative AI
+ecosystem before joining City I spent a
+good part of my career at Google and
+Salesforce building Planet scale
+products and it's been a very
+interesting Journey so to give you a bit
+of a view into the scale of city city
+operates in around 100 countries and has
+about 35,000 Engineers how that is
+relevant to our conversation here today
+is that everything that we engineer
+everything that we develop every service
+every technology that we use has to be
+very aware of country specific policies
+regulations and that makes it incredibly
+interesting to build something at
+scale we've been interested and very
+keen on generative AI from the get-go
+from GPT 2 days and um extremely Keen
+actually when chat GPD was launched and
+ever since then there's been no looking
+back in fact one thing that we knew from
+the get-go and that is that if we had to
+make gen happen if we had to embrace it
+in the company a bank at scale we had to
+build very robust foundations and in
+fact that's what we've been very very
+hard at work doing making it real
+building these
+foundations along the way there have
+been so many lessons that we've learned
+that is what I want to distill down for
+you uh this evening so before jumping
+into that what I want to do is very
+quickly if I can get to the next slide
+which for some reason is not tabbing
+give me a moment
+please I know s of you got that done
+Su okay
+okay great thank you so I want to give
+you a bit of a context and a view of
+what the ecosystem looks like currently
+this is evolving at a very rapid Pace it
+changes every week three months down
+it's not going to look the same but this
+is where it stands today at the heart of
+it is the AI Gateway and why is that so
+important because that is the layer that
+gives us the security the scale the
+auditability the Telemetry meter that we
+need so it really holds everything
+together and that is the thing that
+fronts all the conversations all the
+communication all the requests that we
+make to the models that we have at the
+moment in the in the
+repertoire and on the top of the AI
+Gateway we've been able to stand up some
+very value added functionality some
+layers that we've developed particularly
+all the Enterprise Integrations that
+we've built on the top of the Gateway
+also the fact that we now have a rack
+store that's come together again very
+much tight to the central ecosystem the
+AI Control plane our eals framework that
+you referenced extremely important so
+that started to come together and mature
+again very much linked to the AI Gateway
+and several other value added
+functionalities all the applications the
+business applications that we enabling
+they talk to the Gateway and are able to
+then communicate with the models that we
+have enabled at this point in time time
+lastly what you don't see here on this
+slide is this concept of AI blueprints
+that we have rolled out which means that
+if there are any of these countries any
+part of business that needs to build an
+application we are able to codify the
+best practices that they should get
+started with so these are codified
+blueprints as part of the central um
+Central infrastructure Central packaging
+more accurately is is what we have and
+certain business tools as well so
+generic utilities that business units
+across the globe across these countries
+can use to interact with generative AI
+so that's where we stand currently now
+starting to get into the first lesson
+that comes to my mind as as you'd
+imagine I'm from a bank so this is this
+is very very important controls and
+Automation and this is something we had
+realized nice and early that to be able
+to make this happen we had to automate
+this and we had to be able to apply
+controls along the way it's very
+regulated so we currently apply controls
+to everything that we do at various
+points in the journey when you think
+about the journey from the lens of
+generative AI it's got three key points
+applications the Gateway models and the
+model providers the cloud provider so
+that's exactly what we do apply controls
+along that Continuum for applications as
+an example something that we do is let's
+say we've got an application that
+summarizes documents PDFs document docx
+files pptx files Etc we ensure that we
+check for sensitivity labels to see if
+there is any restricted data in the
+document does it have sensitive pii data
+and such and we are able to then
+determine which country it's originating
+from where does the data reside and
+based on that we are able to really root
+the workflow to an appropriate model so
+that's an example of a control applied
+as left as possible at the application
+Level thinking about the Gateway there
+is there's a series of control that we
+apply and I must mention which I did not
+on the previous Slide the Gateway is not
+a product that is off the shelf we have
+developed it from scratch and uh I feel
+very proud that we've engineered it
+inhouse it's a set of goang services
+very lightweight extremely performant
+very scalable uh which are packaged up
+run in kubernetes and we happen to have
+clusters as you'd imagine across data
+centers hosted on Prem to keep us more
+secure so that's where that's where the
+control plane the Gateway runs and what
+that makes possible is this concept of
+pluggability so coming back to controls
+we apply a series of controls and checks
+when a request is traversing via the
+Gateway all the way to the model and
+some examples of that would be as you'd
+imagine is the prompt safe are we
+leaking any pii are we leaking any City
+specific entities and that could be
+employee IDs keys artifactory keys
+things like that
+you're also able to assess requests in
+terms of inspect requests in fact in
+terms of where did the request originate
+from what is the IP address which users
+are making these call outs are these too
+many call outs metering it rate limiting
+it and also making sure that the right
+thing is happening via the Gateway and
+um also archive these requests and I
+keep saying requests but it's requests
+and responses as well for forensics and
+for auditability so those are some
+examples of the controls that uh we
+apply thinking about the model
+themselves we we happen to use a variety
+of models from across provider so
+Google's one anthropic almost getting
+enabled um open AI models via Azure and
+a set of Open Source models as well so
+open source open weights models and what
+we we ensure contractually with some of
+these larger providers is to make sure
+that one there's no logging that happens
+in the Cloud environment that the model
+is hosted on that's one and second that
+the models don't learn from our data so
+that's something that's incredibly
+important to us and that's um generally
+part of the contract when it comes to
+larger providers and of course for open
+source models they happen to run very
+much on kubernetes within our ecosystem
+so the level of comfort we have with
+those is a lot higher another thing that
+I'd like to mention is that certain
+functionalities are extremely attractive
+and example would be caching context
+caching in particular that Google has
+enabled we would love to use it but we
+take a very cautious approach to using
+some of these functionalities because
+invariably what caching would mean is
+data residency in the cloud or wherever
+the provider provides their services and
+that's not something that we can take
+lightly which means we threat model we
+make sure that the the the service of
+the feature safe to use and only then do
+we have it enabled within our ecosystem
+which also means that at times we end up
+building what is available out of the
+box but uh but that keeps us safe so
+those are some of the controls that um
+come to mind that have been very handy
+for us along the way and in doing so
+what's happened is that we're able to go
+faster because we feel more comfortable
+in being able to use more and more gen
+in our um almost ba processes we're
+going to get there sometime
+soon sure
+that's a good question so at the moment
+the god rail service that I'm referring
+to is something that we've developed in
+house we do use a couple of Open Source
+models to make that happen for prompt
+injection pii detection and um entity
+detection so to speak we are actively
+looking at some vendor products such as
+Lera protect Ai and others as well but
+um that's another story at the moment
+it's our in in grow homegrown tool
+machine learning classifiers because
+it's an interesting problem if it's llms
+validating the output it could either
+mean mean latency if these llms happen
+to be on Prem or it could mean leaking
+some data so that doesn't really help us
+very
+much do you actively monitor the I know
+Twitter or whatever for prompt injection
+attacks and H swap between your
+providers depending on what's going on
+that week
+no not really no it's kind of a hobby
+for a lot of people is to H yeah to get
+the models to misbehave for most part is
+harmless but for your kind of setting
+yeah I think we very shielded from that
+so
+far okay so I was interested to know how
+would you protect yourself from the data
+that the model was already trained on
+you have a contract with the cloud
+provider they don't TR on your data yeah
+but they might have TR on somebody
+else's data H that might be influencing
+your data that results that you're
+getting yeah I think so just to so the
+to repeat the question the question was
+how do you protect yourself from the
+data that the model is already trained
+on because the results you see would be
+colored based on the training the model
+has had yeah it's it's it's it's a
+problem that one has to protect oneself
+again so a lot of it perhaps goes back
+to use cases and the capacity in which
+you're consuming the output I'd say a
+lot lot of our use cases as you'd
+imagine are a lot around documentation
+report generation reviewing documents
+that's one set of use cases simplistic
+ones but there that's a very common
+pattern and the other are around code
+generation code reviews
+Etc you'll see that and I'll I'll cover
+that but um the capacity in which we use
+models how much automation do we want to
+bring into the mix strategically and
+currently we've been very conscious
+about that which means that we do very
+firmly believe that um where the
+reasoning abilities stand we need to be
+able to have these models grounded in
+some reality and which is human evales
+something deterministic so that really
+gives us that guardrail which is a human
+review which is generally more critical
+in nature that's one way of looking at
+it rag use cases again simpler because
+you have a lot of grounding that you can
+provide as input and context so that is
+what we fall back on and that's really
+stood Us in good stad so
+far
+mhm we audit yeah we audit the yeah
+requests and responses
+yes well when I said audit I didn't so
+much mean model responses in terms of
+correctness that is a different part of
+the journey not when I say audit I mean
+really making sure that what's going to
+the models what's coming back is safe
+you're not leaking information we're not
+talking about things that we shouldn't
+be talking about the responses could be
+off track but then evals is what keeps
+us to point on that
+front
+yeah
+yeah interesting questions again get
+gets it to a proprietary space but that
+is more contractual with with the
+providers
+yeah any other
+questions
+LMS like like you have that in place it
+was amazing actually what You' have
+achieved in house so you have some sort
+of llm Ops in place um we have llm Ops
+in place but I think we're maturing it
+as we go along what we yeah what do you
+mean l with L Ops for me is generally
+observability and the ability to see
+exactly what's happen
+that's been a motivation gen or non gen
+for us know what's happening have that
+data visible have it visible in a
+self-service manner so that's what we
+are almost doing the same thing for Gen
+and making it visible and also
+Deployable right not very
+Deployable exactly yeah yeah very
+repeatable yes and the other thing maybe
+if you'll cover and answer it in the end
+is like why do it like what's the ROI oh
+yes sure that's an interesting question
+isn't it okay so I think we segue into
+this this subject here taking a
+staggered approach and I think perhaps
+this is going to resonate with most of
+us here being able to be iterative and
+try things out is extremely handy but
+what I want to cover when it comes to
+this is a few things so it's it's an
+Enterprise it's a very large
+organization by taking a staggered
+approach I mean a few things so as we
+started and this may have been 9 to 12
+months in the past are slightly longer
+we knew that to make this successful we
+needed a level of awareness across the
+organization which which led us to
+actually forming a Leadership Council
+across City putting together a task
+force making sure there's representation
+from across the bank and that means
+across countries across departments Etc
+making that happen because that one
+built awareness second we had a whole
+set of use cases that people wanted to
+take to production and when I say a
+whole set of I mean hundreds of them
+registered saying these are good
+candidates but we had to sift through
+the best ones and by that I mean
+thematic use cases that would bring us
+the mo most return on investment at
+least notionally and that's how we went
+about it and that that that meant a
+dozen of use dozen use cases that we
+wanted to focus on put our energies into
+prototype prototype more seriously and
+then be on a p to production with those
+use cases along the way maturing the
+ecos system maturing the architectural
+building blocks that I had um that I
+showed you and also maturing processes
+our governance function a compliance
+function and letting teams in um very
+key departments such as risk to catch up
+to thinking about new ways of handling
+risks and risk mitigation strategies so
+that is what uh we could do because we
+took an approach like this that's one
+second we did not we decided not to
+commit to a single model provider very
+early in the game which means have
+access to more models put in the effort
+and have multiple model providers in the
+mix and and connectivity established and
+everything that's needed to bring to
+life a new platform so we did that and
+that's been a good decision because now
+we are able to use models for their
+strengths understand what's better
+what's not what's a good fit what's not
+and um that's that's given us a lot of
+well real learning and the opportunity
+for use case teams to select from a
+repertoire of models that we are happy
+to back generally the selection factors
+as you'd imagine would be three to four
+such as what's the latency what is the
+quality of output that we seeing um how
+much time is it taking how much context
+window what is a context window size
+does the model support and perhaps most
+importantly for us what data
+classification and residency so what
+what does does the use case need can it
+actually have data traveling all the way
+to Cloud even if we not storing it if
+you're not caching it or should we use a
+nonpr model things like that but we able
+to make those selections because we've
+we we have a huge set of models that we
+can choose from so that's been in
+handy all right moving on talking about
+this I think we already got into the
+subject human in the loop extremely
+important um and I say human in the loop
+but what I really mean is the ability to
+have have something deterministic
+validate the output of the model so
+that's what we are doing at the moment
+principally we do not want endtoend
+automation that's a conscious decision
+we are going to we're going to happily
+almost revisit this decision in the
+future when we see a step change in uh
+the model's reasoning abilities but we
+don't see that yet and we find that
+there's more value in being able to use
+models in these assistive capacity as as
+opposed to Replacements to end to end
+workflow so that is what that's what
+we're doing at at this point in time the
+second thing that we are very hard at
+work doing is reading city city apis
+city documentation city services
+everything deterministic for Gen so we
+making it more ready for Gen and by that
+what I mean is that our document
+interfaces our API interfaces metadata
+documentation of these apis the way we
+think about about schemas is becoming
+more gen friendly so that if we had to
+build an endtoend process with Gen in
+the mix we could have these almost
+building blocks where gen would play a
+role the output would be validated by
+another deterministic service handed
+over to a human etc etc our
+documentation parsing um logic now
+considers gen as an active actor by that
+what I mean is we've restructured a lot
+of our documentation so that it's
+friendly of a rag it's friendly of a gen
+and we're getting better outcomes so
+that's that so it's been a step change
+in the way we think and um in the longer
+term I think when we have gen models
+that become more capable it's going to
+really help us expedite our workflow so
+that's how we're looking at it thirdly
+we and to your point s of we have a very
+we're trying to have a mature and
+tailored approach for evals because
+there's so much material there's so much
+benchmark
+so many libraries in the market but this
+is something that one has to tailor for
+one's own needs and it's not easy
+because there's no standard formula in
+fact it's so different when you think
+about code evales versus Doc evales
+versus very use case specific evales so
+we're trying to standardize that as much
+as possible that's one but more
+importantly we're trying to change the
+mindset where we we start to get our
+engineers and all of City to
+okay yeah no go for it go for
+it
+yes we use several we are experimenting
+when it comes to Li libraries you know
+so I wouldn't name any but um but what
+we've done is we've written a CLI and a
+framework from scratch and I think that
+works better for two reasons one because
+we understand it inside out second it's
+simpler and it's more scalable and it's
+fully customizable to our needs so so
+that's what we are using we can use
+weights and biases mlops anything open
+source to be able to present the
+findings of our eval runs but the Run
+itself and how we run it and what we
+look for is very custom to us so it's
+not going to be things like not only
+going to be things like correctness bias
+toxicity and the S to eight Dimensions
+that if you look at most of the
+libraries
+uh you'd find it would be more tailored
+to our own
+needs it's a good question in fact
+that's what I was going to get to next
+so with evals the the the motivation and
+the dream is that evals it needs to be
+reduced to or looked at as testing the
+way our teams don't release anything
+without good unit testing integration
+testing performance testing ET Etc I
+really want my teams across the company
+to look at evals that way if you're
+changing the version of a prompt if
+you're making a release which could be a
+fortnightly release if if there's a
+model version change minor or major I
+mean just a model version change we have
+to be able to rerun our eval suite and
+the best way to do it is not with the UI
+it has to be in the cicd pipeline so
+that's what we're doing we need these we
+need the almost the Manifest metadata to
+be checked in a centralized way to
+access it and then it just runs we use
+tecton for as a part of our cicd
+framework so just run it as one of the
+steps it must happen and then the
+results need to get pushed up to a
+central place that's not fully come
+together but that is pieces of that are
+yeah coming
+together yes
+yes so so it's very simple it used to be
+a bit more complex but we've really
+simplified it and that is be able to
+articulate your use case one is it needs
+to be clear if something is going to add
+value it needs to be expressed clearly
+in the least so there is a definition of
+why do you want to do this what value
+will it bring to the company to your
+team and how many users developers end
+users will it impact so how what is the
+impact and really what is the reach that
+is what we look at people obviously put
+in numbers as to how many X Millions
+dollars whatever it's going to save us
+but those are notional numbers as you
+imagine so it's more around being able
+to articulate value and it feeling right
+if one needs to explain it too much you
+know that something's missing
+somewhere
+H
+fa yes yes yeah yeah yeah that's a
+that's a very good point because it gets
+conflated very often we have our
+U yeah we we have our Tech strategy
+which now includes gen strategy I
+wouldn't say that we fully understand it
+but we really getting there because we
+very actively thinking about it and some
+of those things when should you use it
+when should you not when do you apply it
+versus not is is a part of
+that
+yeah yes
+yes
+just did I hear yeah go for
+it that's all right I'm happy to have
+this conversation
+here trying to draw my thoughts up okay
+uh to what extent do you think that the
+work you've done organizationally in
+terms of the use cases and the
+architecture sets you up
+for multimodal uses of the tech
+technology streaming audio both within
+the company and the ecosystem around so
+it's used for fraud and manipulation
+yeah it's a lot of what you've described
+is very very sensible the most prudent
+sensible uses of the technology yeah but
+this kind of wave of audio stuff is
+coming and so it's not going to be you
+building things it's going to you
+surviving the rise of audio Yeah fakes
+we're starting to experiment because
+that's going to be the next wave of
+interesting use cases that we already
+starting to see within the company we're
+not fully ready
+I wonder if I'm sharing too much but
+we're not fully ready from an
+infrastructure perspective there's a lot
+of infrastructure but I need to make
+sure that it's absolutely secure for it
+because when you're talking about audio
+files and videos it's a lot of data
+movement being able to protect that data
+becomes very difficult because the
+capability when I was talking about
+guardrails guardrails are great but they
+don't fully apply to video they don't
+apply to multimodal content the the way
+they do to text content so that that is
+something we need to crack once we crack
+that we've got all the models the best
+ones that perhaps will support us in
+that Journey but that is the piece that
+we're trying to crack at the
+moment good shall I move ahead um I
+think we've covered everything that we
+wanted I want to talk about in
+this thank you so this is the last one
+and a very very broad brush fun building
+intuition this has been as you'd imagine
+we've done a lot we've built a lot um
+which means we've had the opportunity to
+understand a bit more about gen and the
+gaps and where we want to invest we need
+to invest in all of those things but the
+one that I want to focus on is build
+versus buy we've known that as we mature
+our ecosystem at city it's going to be
+build and buy we would want to build the
+core components of our ecosystem and
+we'll want to supplement that with a lot
+of these wonderful vendor products
+really that are coming together it's
+incredible to see so many good ideas so
+many new companies burgeoning across the
+globe making it happen so we've known
+that we would want to definitely have
+some of these in the mix but it's not
+been a very straightforward Journey To
+be honest to make those selections
+happen and the reason for that is that
+there are lots of good products but when
+we look under the hood whil see a good
+great idea ideas they perhaps May lack
+reality and a lot of these products as
+as we've seen them they seem to be in
+their infancy first incarnations of
+great ideas which means they're not
+ready for scale they may not be ready
+for the the kind of security we need the
+latency that we expect the endtoend
+automation that we expect for these
+products come with IAC and um good
+documentation many many fronts so that's
+been quite an incredible journey and
+that's in fact led us deeper into
+building more which in my mind has been
+an absolute blessing in disguise one
+because it's fun we're really enjoying
+it but more importantly because we are
+able to now form a better understanding
+of what we need to invest in where the
+gaps lie and what should 2025 look like
+in terms of how we think about our
+ecosystem how we develop it and enrich
+it so that that's been wonderful um and
+it's really expedited our learning as
+well I think there was an offer to be
+able to talk about hiring so yes we are
+hiring there's a lot of focus on gen I'm
+hiring um across the globe really so Us
+London India several other locations so
+if I could post that somewhere or link
+to some openings I would love to be able
+to do
+that that's the end of it these are the
+distill down
+lessons thank you
+hello hello um what do you think about
+llm roning have you seen any progress in
+the past 24 months say 24 months yeah 24
+months for certain in fact even in the
+last six months um well reasoning is a
+good term um reasoning and almost
+credibility to an extent is what we've
+seen so s certain features have made it
+a bit more deterministic for us for
+example this entire concept of being
+able to use functions function calling
+Json mode practically that makes it feel
+a bit better a bit more deterministic
+and hence better to be able to bake into
+any kind of workflow so that's felt like
+a step change but going back to your
+question reasoning wise yes 24 months
+I'd say definitely um I personally
+happen to like 3.5 Sonet quite a bit and
+all all the anop IC models they are
+absolutely great 40 has been very
+interesting as well and definitely a
+step change from uh turbo so so that's
+how we see it and um I see it at least
+anthropic is just about getting enabled
+in the bank so so yes and would you
+attribute that that that performance
+jump or that progress to more data
+bigger scale or is it using the llm
+models Plus some more deterministic
+software check input outputs or is it
+that the base models themselves I think
+it's the based models themselves and
+I'll tell you why I say that practically
+there are several clis that I've written
+and several services that have written
+and the way I felt about how much it
+could do 6 months ago now switching the
+model let's say to 3.5 Sonet you totally
+get better outcomes I've written some
+agents as well that were not able to
+complete a multi step multi-agent
+Journey very nicely I shouldn't be
+naming models which ones didn't do it
+but there were some that did not even
+with very large context windows but now
+I think they can you know not the same
+ones but for example 3.5 Sonet does a
+good job of being able to do something
+not extremely complex but a decent sized
+program or whatever task I'm giving to
+it end to endend with handovers handing
+back to previous agents all of that so
+that's incredible to see so it
+definitely feels like it's headed in the
+right
+Direction go by there was a question
+here sorry um first of all just like
+genuine appreciation for sharing uh all
+of this the hacker in me loves that you
+flexible to everything you're
+experimenting with everything just
+thanks for sharing um first sort of uh
+concrete question um when you were
+saying that uh how you're helping City
+prepare for Gen you mentioned how you're
+structuring your documentation
+differently now to be more indexable for
+agents could you comment on that like
+what does that concretely mean yes I'm
+always worried about leaking any kind of
+proprietary information but generally
+speaking so we've got in fact my group
+has a lot of tech writing Focus I I like
+to have very good documentation for
+engineers and just generally clear
+documentation so for example at times in
+documentation you'll see there's
+repetition there are certain common
+aspects that get repeated and I'll take
+some examples not really Le specific to
+city but let's say the cicd section may
+need to be done the same way but it
+could be very repeated across let's say
+four to five products or n number of
+products now the way we structure
+documents the way that works better with
+Gen would be when you've got these
+almost Snippets Central sections that
+can be referenced from various documents
+or product pages so what what that leads
+to is when you're trying to have any
+form of rag on your site or your
+documents there's lesser repetition
+which means that when the llm is then
+producing final answers to a certain
+question that you've asked again there's
+lesser repetition or cleanup that needs
+to happen happen or pre or
+post-processing that needs to happen so
+that's what I mean by restructuring
+documentation one second using a lot
+more metadata because our documentation
+has well has good metadata but I think
+we could have done it better which is
+what we're doing now more tags more
+metadata more um more information on
+recency or next review date Etc anything
+that can Aid the model to pull out the
+the right subset is what we are trying
+to focus on and this has helped again
+the way images are structured in
+documentation as well to be able to
+index that better which means one you
+got to par multimodal content but then
+also have a description that is Handy to
+enrich the messaging around it is
+sometimes good so we're trying to think
+of those things and make our
+documentation
+better um thank uh second last question
+promise but um
+so sorry uh but um are you able to
+comment on uh at the current stage uh is
+your evaluation pipeline more
+qualitative or more quantitative and how
+would you expect that changes as you
+welcome multimodal models that's a very
+good question it is it
+is we I really Aspire for it to become
+more qualitative which is definitely
+difficult we moving towards that so it's
+more quantitative at this point in
+time so U I had this question so from an
+operating operating model perspective
+like people process and Technology what
+are the top one challenge or top two
+challenges so far in this journey you
+feel like from people from process and
+Technology you're going to get me in
+trouble aren't you asking me so many um
+what would you think
+technology is perhaps something that I
+think all of us love as Engineers right
+and that's something you can tame one
+way or another it's going to be the
+other two for the most part yeah so you
+see people as the most toughest thing
+there or in this
+journey well I mean you got to take
+people on a journey and that takes time
+and energy and perhaps as Engineers you
+want to invest more energy doing things
+developing things and going at pace so
+yes I would think thinking of it that
+way that is more difficult okay I'll
+stop my question I'll have oneon-one
+with you
+yeah yeah okay
+that's just sorry you did a great job by
+the way like amazing and investing on
+data preparation I think that's the best
+thing you can do because that's where
+most companies can you please talk in
+the
+mic yeah sorry um but my question was
+like uh So you you're developing mostly
+in house so you're not using something
+like AWS most most a lot of financial
+Banks and all they use AWS Bedrock or S
+so you're not using something like
+that so not not AWS Bedrock we use we
+use the vertex Suite so Google we use
+yeah so and that's a service so
+basically the vertex service which is
+managed for us so just no data residency
+which means we do not use any any data
+products we don't even use context
+caching but request response we do use
+we do not use GCS to be able to store
+our documents in cloud storage just
+again for that the same reason but we do
+use Google we do use open AI via Azure
+at this point in time
+yeah model hosting is done on Azure for
+open a models and Google of course it's
+a managed service yeah
+yeah it's a it's a complex answer to
+that so we definitely see productivity
+gains and we do think it's going to
+continue to Trend in the right direction
+as a bank you know there's there's so
+many opportunities that um that you have
+to be able to automate
+processes it's very human dependent at
+times and we can bring automation a
+different way of
+working especially for processes that
+add value but can add value in a
+different way I just automating them
+away so we see a lot of value can be
+created there at the moment if you talk
+about Roi in terms of typical Roi we are
+very aware of the fact that this is the
+point in the journey where we've got to
+invest anything that you've got to get a
+return from sometimes need needs time
+patience and investment so that is where
+we are having said that we very aware
+that we should be starting to track how
+much are we investing what are we
+expecting and how do we make that happen
+so that awareness is very much there but
+it yeah what does that translate to
+definitely I want to put this on record
+does just does not mean we'll have fewer
+people that's not the only way we are
+looking at it it's more about making
+more things happen doing things a better
+way and figuring that out so hence I say
+it's complex but um yeah early on the
+journey
+we we don't have the third speaker so we
+have some extra time for questions so
+and also we have like in the end a bit
+more time for
+discussions
+one comp
+it takes more time yeah um yes we we
+would see the same but actually I think
+strategically and principally the way we
+look at it is we do not want to automate
+away our complex tasks that perhaps are
+the most valuable tasks also so there's
+almost this Matrix if it's animportant
+task and if it's complex that's not
+something that we want to delegate away
+to Genai because that's not where we see
+value because they could be really
+critical what's the point of delegating
+away the most crit iCal thing for
+yourself you don't do that generally I
+would say the same of code I don't want
+ji to write all my code because that's
+the most fun part of doing things but
+that's what so we not we're not trying
+to attack the most complex tasks and I
+can give you another parallel not
+related to gen but relevant to bank if
+you think about embracing public
+Cloud other companies may have done it
+10 15 years ago right banks have not
+done it a decade ago but if a bank
+starts from trying to migrate it's most
+complex platform into Cloud that would
+not set them up for success and I almost
+apply that to gen hence we do not so in
+that set of the Thematic use cases that
+I was talking about it that that set was
+not in it most complex tasks because we
+would just set it up for failure that's
+how I look at it
+yeah yeah
+yeah
+yeah yeah
+yes sure yeah so uh my question is just
+reflecting back to gentleman's question
+regarding to people that you have uh you
+mentioned that it has been introduced to
+many teams across uh different
+department uh what was uh what was the
+acceptance uh across different teams so
+what was the extremely high so gen is
+not something that you need to position
+teams want to have more and more of it
+and want to participate do more and more
+of it so you don't have to Market it to
+them they want to do it and they want to
+learn and they want to almost use it in
+their day-to-day processes so the
+acceptance was really 100% we've got
+such a backlog of requests interests use
+cases that are registered for that
+reason because people see value in it
+and um yeah want to go on that Journey
+thank you my second question is uh how
+did you pilot uh like selecting subset
+of people from different uh organization
+or just filtering it's a good question
+so collectively all of us were new to
+that Journey but some some parts of the
+organization are Central and have to
+make sure that the architectures the
+designs
+the platforms are right we happen to be
+part of that which means the way we
+piloted was once selecting that that
+subset the Thematic set of use cases
+making sure as a task force we are close
+to ensuring that the designs the
+approach is right and it's not too
+difficult because you're talking about a
+dozen or a small set you can do it you
+can make sure that the themes are coming
+together the blueprints are coming
+together right things are happening and
+then it's rinse and repeat so that's how
+we went about it making sure that it is
+getting reviewed there's a guided
+process and journey for these use
+cases one last
+question that's a part of our investment
+you know that that phase of the journey
+so
+yeah um yeah sure so I also work for big
+bank at a guess how many people you
+think more people are using your tools
+officially versus the number people who
+are
+using commercial tools on the side you
+think like what's your feeling on
+because I understand your TOS prob very
+restrictive about what people can do
+with them but my experience would be a
+lot of people are probably
+officially going outside of that and
+using other geni gen tools do you have
+any feeling of how that works in City
+look at city that that path is very
+difficult yeah you're not going to be
+able to use another tool let's say open
+up a chat GPT interface and ask a
+question those Pathways will be blocked
+for you or you you would not be able to
+interact with let's say o Lama and spin
+something up so effectively you've got
+to make sure for everybody to have a
+experience you make the tools that
+you're rolling out they are their very
+best so that is how we looking at it I
+happen to come from an engineering
+background so I'm very invested in
+making that happen because we also
+consumers of the same technology so yeah
+that's how we're looking at
+it thank
+you
+excellent of
+course we have a short 3 minute break
+and then mikola will be presenting about
+llm in C generation
+the pin on your sh
+yeah a bit bit closer
+did you have
+any sorry you make a photo for me
+presenting
+so I
+ask thank you so much
+for that's a long day I don't think
+thank
+you goes to
+everyone okay with stre minutes started
+and uh voice uh uh does sound already
+turn it on or I should yeah I hear hear
+your sound it's already recorded so I'll
+just get everyone together
+sorry I forgot to ask about timeing how
+much time I have 20 around 30 minutes
+okay so let's see you talk 25 minutes
+and five minutes for questions yes good
+yes
+down thank you cool
+yes hi today I would like to talk to you
+about uh code generation and practical
+code generation does it really works or
+does it fails we will try uh in case
+anything will fail I have copyed file so
+you can see and see how it works
+so what we can do we can do practical
+session for code generation and uh about
+myself super short I'm rbe engineer here
+at Auditorium it's a small educational
+startup I have more than 15 years of
+software engineering experience had a
+lot of bunch of techologies worked with
+from Front End backend system
+administration a lot of so now I
+focusing fully with uh llms what we will
+use we will use uh approach which I can
+recommend you to use for your daily
+development for simple features or more
+complex if you have enough money to put
+everything into
+context uh selfhosted gradio version
+gradio chart is very interesting thing
+which helps you
+to use just one small
+file and have a nice
+API this is API which you can use so uh
+I created a
+special system prompt
+uh don't worry you can find later it in
+repository it's very long one so
+basically it's chain of thoughts and a
+lot of things added into it to be like
+super nice super good you know this kind
+of languages this kind of Technologies
+uh be careful when you do it and blah
+blah blah blah I spent like several days
+to craft it so or a bit less actually I
+don't remember so a bit shorter so
+you'll set up how it will react actually
+system proms it's very important because
+if you use just orinal your helper your
+grateful agent you will get some
+different results on different
+level next one uh we can I would like to
+show you a small D how to build the
+calculator uh The Prompt which I would
+like to do is create calculator and make
+it work
+oh dramatic
+P yeah something we have let's review it
+so understood I will assist you on
+focusing on doing these things and uh
+create so we have several
+steps 1 2 3 4 five okay this session is
+very nice I create I can show you
+previous session which was much better
+in review so uh we have output which
+tells that we can create calculator and
+uh what we need to do for
+this uh
+run the application create react next
+application create several
+files copy them then update page main
+page to it and then add some basic
+starting then you just import files and
+everything
+works
+cool let's see if it really
+works uh this is our application which
+we
+have uh the problem was that I created
+it with a
+standard
+uh standard super
+standard review and it has as you can
+see
+let's go back to slides so step
+one uh setup project create calculation
+component update main page at basic
+styling import SS file setup project it
+works with njs just empty project it's
+it will work
+always then I added comp calculator JS
+file which you can see here is uh
+added here but the problem our
+repository does not have
+uh page index.js because because I used
+typescript when I uh created react uh
+application and this is a
+problem
+uh the problem is that we don't have it
+we don't have page uh uh this file
+what we can do we can ask uh I use
+typescript please uh and there is no
+file index GS and here's my current
+prompt
+okay uh how we can pass here the whole
+project which we
+have can you tell
+me how we can pass project which we
+currently have into our repos into
+prompt we can like make what we do oh
+copy file copy file past it here
+and all files this is actually really
+long I prefer better and uh much more
+interesting
+way uh we can use uh
+terminal um so can you make the screen
+screen larger because we don't really
+see much or you just say in in yes so I
+created a special helper Library which
+uh helps you to compact all your
+projects into one
+file so all content of your project
+let's see
+it so it uh basically what does it do
+it's uh compose every file which you
+have into
+a it provides directory structure so our
+library our LM client can use it it
+gives you files which you have here and
+their content one by
+one does it matter
+on sorry does the ordering matter uh yes
+I pref I try it matter and it always
+stable EXA uh for my library which I
+created it's stable so I spent several
+weeks to improving it slowly but by the
+way yes so you're going to copy this
+into the
+UI this yes I okay
+so you know teral is always open I
+pr
+I you know
+just do
+for such such a UI yes uh you can do
+this uh the problem is uh our when you
+interact with LM for coding you read a
+loot you copy something and you copy uh
+your output into the uh you don't know
+exactly what uh The Prompt which you
+craft you want to craft it f as fast as
+possible and uh here is my project so I
+just
+crafted and I
+see I forgot one thing to add here uh
+where is here's my C yeah I use TP
+script here's my current project so uh
+we'll ask LM to improve the output okay
+I I can give you to the I I
+don't I some point
+CR oh
+llm Crush like
+know like copy paste
+memory the context window as well yes
+context window is huge but you don't
+need to pass everything you need to pass
+part of your project you need to pass
+controllers deal uh folder or folder for
+your migrations database migrations if
+you do it this is like second stage of
+uh what need to be done because when you
+have a huge project for million lines
+you cannot copy everything you have to
+cut uh you have to just take output for
+your representation of your architecture
+like main files this you can do as
+initial part for project like my
+controllers usual methods API and adds
+but this is like more different talk uh
+my talk is very
+simple your code is extracting structure
+of
+your is that it for uh no it's copy
+paste because uh I did a lot of things
+and uh I created pipeline which read
+which uh have a loop when you do changes
+you pass into llm llm provides you
+output with in Json in files you can
+update them but every time you get a
+response from LM you have to verify it
+and see like every time you get
+something from LM you have to do a PR
+actually this is what you get and for PR
+review it's better to do it in UI like I
+use uh GitHub UI very good and uh intell
+ID UI for reviewing the two best visual
+tools
+so uh the very good thing which gradio
+provides you is also have a copy paste
+actions so you can copy files I don't
+know what happens here but not
+everything works is expected
+so
+um we see that it tells that
+uh the long output it breaks
+it okay so from previous sessions output
+so thank you for providing current
+structur project and files I see using
+typ script and uh we need to make some
+updates into calculator component so it
+gives you nice out for
+calculator and updates to main page so
+page txt we don't have
+index
+file Let's
+uh check out
+here so we have pushed updates to page
+txt which was provided by LM and layout
+txt which allowed us
+to import F Styles and react
+components
+so the good part of this you can use
+Library if you want you can download it
+it's open for
+everyone uh one important thing when you
+compose your prompt when you compose
+your directory if you do for example
+just archiving it as uh with zero with
+star and put it as single file you will
+put everything include system folder
+like SN models do nets you don't want
+this you want to cut out as much as
+possible uh I did a simple filtering for
+folders it's uh you can adjust
+to your needs and current current setups
+are usually fine and also another
+important things when you work with your
+repository you sometimes have St
+environment files with passwords you
+don't want at any condition them to leak
+into the LMS API at as far it's your own
+API so one additional feature is for
+password filtering so it scans all input
+if it finds password it replace it with
+uh replace it password one 2 three
+so uh now we got the response where LM
+tells yes we can fix it change these
+files but when I run it we get a
+problem U let's try
+what you
+work no
+way and idea why don't you look at
+what's in getting directly and just fil
+out those if you look at getting have
+like all your password files and other
+files that you don't want LM to know
+about so that could be an
+automatic yes I created special file
+passwords for you add all your password
+which you want to filter out because uh
+passwords can be super random you cannot
+detect it from repit
+have yes you have G ignore but this
+Library doesn't use G
+ignore you do any ranking so when you
+selecting the text you rank the output
+right so you can re rank it in the
+form you can say heym give me the best
+yes when you do next you can
+uh so there was an issue with
+code let's check out that verion no was
+fixed please
+break it's it's not D if it doesn't
+breaks just to ask so what you're trying
+to run now is the code that you buil by
+using yes only that
+good
+oh and just to recap so what you said is
+that you use the AI to build the code
+but then you put it in your editor you
+riew it manually and you compile it yes
+uh okay let's go to latest ver because
+it's uh calculator I can simulate that
+error
+fresh oh
+no uh there was error when I building
+the Cod and the error was that
+calculator TT has was built for Server
+components but uh it was trying to do it
+on front
+and you have uh okay you use State use
+state is not allowed for sver side
+components and you have to fix it I did
+this small fix and other fixes and
+uh is that the stoas nature of the llm
+sorry how many times have you tried
+running that it could be just random
+that it got it right that time oh you
+can get the question is of your um how
+good your promps are and
+uh like you get mostly stable results
+so this is
+reality
+no okay this
+is calculator CSS F okay let's check out
+the latest version
+I don't
+know uh yes it's connected to the cloud
+CL which which L uh Cloud Sonet
+3.5 I think
+it's broken yes so okay it's broken but
+uh let's uh do one thing I think we
+should save my
+demo no
+yes and does the llm sees the git files
+or or it only sees the input no I LM see
+only what you put into the llm into Pro
+yes
+yes so it's build the calculator the
+code is in
+repository and uh as you can see it
+works what you we we want to test it
+maybe uh which let's make it uh
+on we don't have square root prom for
+so divide by zero was was proposed as
+improval
+my sorry uh
+1,000 plus 2,000
+to 3,002
+divide by seven I never tried
+divide okay uh but what we can see here
+button layout is uh kind of strange
+designer design requires improvements
+and we have zero test here so actually I
+don't know if it
+works uh yes so I test it it looks like
+it works we can divide by zero
+to clear yeah it's Infinity cool it it
+didn't
+break uh let's see if I really hardcoded
+it uh we can open
+the
+directory
+Cloud C free here
+[Music]
+components I don't see any hard code
+here it just clear
+divide
+so uh what you can have uh I uh pushed
+this thing into the
+repository uh calculator example you can
+download it you can see whole prompt log
+for the prompt session Cloud session and
+uh to see everything was which was
+included also Cloud
+chat interface you can get it here run
+it locally just don't forget to set up
+environment variable entropic
+key prompt Library uh the prompts which
+I
+crafted web prompt system developer
+prompt when you want to do some
+theb web coding St prom the good one
+like uh a lot of
+iterations also dump of current project
+which was done
+here uh so you can get
+this cost was just yeah I will do it oh
+don't worry cost was just 10 cents
+because it was very short and actually I
+got like from the first attempt the nice
+result for the for calculator there was
+just several
+issues one major issue I got G I created
+typescript repo but it was about CL
+initially proposed it to me to use
+JavaScript files which didn't work uh
+sorry before we counts the question I
+want to mention could you just try one
+more thing like could you try square
+root of minus one sorry square root of
+minus
+one we don't have square roots oh you
+don't have square roots
+we
+can
+2+
+2 divide it
+to
+we why 2 + two no no no uh this
+calculator executes on every operation
+so you don't have the
+oh it doesn't do
+associate yes it's super simple
+uh yeah uh one important thing cloud has
+very huge difference between uh with
+Char GPT and open AI open a has a cut
+off for half year now and actually it
+feels longer so every new API which is
+comes out you don't have this knowledge
+inside uh chpt so you can get outdated
+code being generated when with clo you
+have code which is up to date for the
+reasoning things like if you have
+something complex problem you tell us oh
+this is my answerable config it doesn't
+Works tell me why
+uh both do nice clo sometimes provide
+better result but you get a cut off for
+usage very low very low limit for daily
+usage in charge PT I super rarely face
+daily limit so this is like
+important
+questions what was difficult in building
+the prom for you for getting to get you
+the right
+answers
+uh the difficulties first uh when I
+started to use LMS I use just ch GPT
+then I used open a API for basically API
+to J GPT and composing proms I did a lot
+of files which were fetching files
+crafting them into one and sending and
+then getting back uh as I mentioned
+every time you need to make a review
+otherwise you get into Loop you spend
+all your money spend 5 10 20 $100 on the
+loop and you don't get the results and
+uh if you get something which broken in
+console it's uh usually for you easier
+to cut that part because you can get uh
+like output for thousands lines 100
+thousands lines of code broken if
+something the loop you need just to put
+past part of it uh second important part
+with clo when you have this session
+every time you sent all your chat
+history is being sent as it so every new
+message adds to previous message so your
+lock or uh context Windows run can be H
+exhausted first and you spend much more
+money so start new session when you do
+it especially VI are uh using like API
+and you have high limit if you use chat
+uh window you are not that uh bad in bad
+situation but you will exhust your daily
+limit for
+usage other part was like uh as I
+mentioned
+passwords I was very very it was pretty
+boring for me to cut out passwords for
+things which have been store stored and
+you don't want to lose it anyway so you
+spend it time and automating just this
+simple pass part of copying everything
+into one SLE dump it really
+helps so the passwords are cut out by an
+llm or is it like just a script that
+it's a script I can show you the
+library The Prompt Library you have
+here password example so you create list
+of your passwords which you have in your
+directory catch them all and uh
+after uh you set them you set uh command
+PC is uh content uh dump content content
+without password filtering PCS is dump
+content with password
+filtering uh sanitized output I always
+use saniti it
+output and uh then you get your response
+we can
+actually see how it's been
+used uh
+oh not cut sorry
+weim okay super simple directory listing
+file
+content what you have and uh the
+libraries and you can use it to just
+tell me oh let's improve this or
+that for our calculator
+example we want
+order of
+buttons the current project sorry T txt
+describes your project txt I made it to
+make it readible because uh you can have
+folders you can have different type of
+files if you don't know if you don't
+have extension it's hard for your mind
+to see is it folder or is it just text
+file because basically it's a text file
+it's a dump
+yes and are there any other questions by
+the
+way
+um do you do anything to check for
+security vulnerabilities in the code
+that it
+returns
+PR or never ever trust it can it have
+super high confidence on providing you
+output out could have absolutely
+different you can get results like oh I
+cannot access to Port course are bad I
+can set it up it will tell you how to
+disable course it will disable it will
+work or I can access to database uh IP
+addresses it will tell you okay let's
+open database access and it will open it
+for o IP
+addresses
+so but you can ask does this code has
+vulnerabilities and uh
+this is
+current
+project at
+square roots but uh operation let's
+try so uh the instruction on the bottom
+was just for the llm to square root
+operation
+this I don't
+know uh usually request T like 20 to 30
+seconds uh when it was running something
+locally it was able to to run like 60
+seconds
+okay export square
+root Let's
+see we have uh so this time I have very
+bad luck with formatting but uh yes it
+tells let's implement this change square
+root
+calculations and
+uh looks like it's not full output
+h
+no uh expected comma I missed something
+in the
+yeah it's finally
+failing not like trivial output doesn't
+work this session
+unfortunately let
+see
+no let's try to find the
+by the way anyone has one more question
+until uh it's being
+debugged let's see if the square we
+go yeah export default calculator for
+so what this is actually the application
+in use and it there is a still a lot of
+debugging in the process yes uh you
+absolutely right there is a lot of
+debugging and
+so where do you think you would improve
+this The Next Step the is to build it
+for
+automated but you need
+the uh you need to be able to run
+it yes I use it constantly
+s sorry which one GI
+[Music]
+uh I can tell you that GitHub which you
+have in
+the uh Enterprise version is actually so
+no square root cannot be added it's
+failed uh so GitHub and compound
+Enterprise version been fine tuned on
+your code base and actually I got very
+nice feeling when it was enabled uh
+because before it was like starting and
+having providing
+like very bad result not usable at all
+and like in three months I got like
+immediate feelings that could become uh
+exceptionally useful for what you really
+want to get because uh it's
+uh it started to really show the normal
+code provide nice of completion which
+are which were in line of our code
+base and when you use it as a private
+version as a as private account and
+account it's a different things it's
+really
+better uh yeah it's better because it's
+fine tuned on your
+codebase but generally it's uh good in
+generating
+tests uh good in super small fixes good
+as long TP when you autocomplete it but
+it's bad when you try to ask him to do
+something complex it's it cannot do
+it oh maybe I have not used it cannot
+tell okay
+uh any other
+questions have you tried um
+I tried previous things like GPT
+engineer or way stuck in the loop if you
+ask to do something more
+complex so basically I use this part as
+to develop something to get the initial
+impression how something new should be
+built you don't know this you read
+documentation for every feature you use
+and then you can understand if it's okay
+or not only this moment to get results
+uh for UI it's fine for backend it's
+also fine but you have to know which
+libraries you use because uh we can have
+usually you have very complex Li Library
+hidden on they very simple interface
+which you have to
+understand good thank
+you I think it's it's very difficult to
+do
