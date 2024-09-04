@@ -1,27 +1,43 @@
-# Experimenting with recent LLM developments 🧪🧫
+# 🧪 **Experimenting with Recent LLM Developments** 🧫
 
-Dino Dash Sneak Peak:
-![image](https://github.com/user-attachments/assets/1744fb49-6e1b-40e7-bf0e-a2d80493bcba)
+## 🚀 Dino Dash Sneak Peek 🎮
+![Dino Dash Sneak Peek](https://github.com/user-attachments/assets/1744fb49-6e1b-40e7-bf0e-a2d80493bcba)
 
-Part 1: Leveraged Gemini Long Context to get Insights of a 2+ hours video, wrote a medium article about it, and even made a presentation slide deck all in minutes 
+---
 
-<a href='https://medium.com/@samarthsharma_/bridging-the-gap-rag-local-models-and-the-future-of-enterprise-ai-4008f4702b37'> Medium Article Summarizing Video Insights </a>
+### **Part 1: Insights Using Gemini Long Context 🔍**
+- Analyzed a **2+ hours video** and extracted key insights in minutes!
+- Wrote a comprehensive **[Medium Article](https://medium.com/@samarthsharma_/bridging-the-gap-rag-local-models-and-the-future-of-enterprise-ai-4008f4702b37)** summarizing the insights.
+- Created a **presentation slide deck** for the findings. 
 
-Part 2: Used Claude dev to make the dino-dash game end-to-end.
+---
 
-Part 3: Learned to use the multimodal capabilities of Gemini, Claude, and OpenAI for various use cases
+### **Part 2: Dino Dash Game Development with Claude 🕹️**
+- Built an **end-to-end Dino Dash** game using Claude dev.
+- Iterated and enhanced the game for a better user experience.
 
-Part 4: Showcased 10 Long Context Use cases of Gemini
+---
 
-<a href='https://medium.com/@samarthsharma_/gemini-long-context-usecases-447472008'> Medium Article Summarizing the Use Cases </a>
+### **Part 3: Exploring Multimodal Capabilities 🧠**
+- Experimented with **Gemini, Claude, and OpenAI** to unlock multimodal functionalities across various use cases.
 
-Part 5: Using Claude to prepare a pitch deck for my AI-for-good startup idea Soul Support
+---
 
-Part 6: Demonstrated 10 different code development Claude Dev can be used for and made dino-dash even better.
+### **Part 4: Top 10 Long Context Use Cases of Gemini 📖**
+- Demonstrated **10 powerful long context use cases** using Gemini.
+- Check out the **[Medium Article](https://medium.com/@samarthsharma_/gemini-long-context-usecases-unlocking-the-power-of-extended-understanding-d1d893945776)** that breaks down each use case!
 
-Check Out the Video for a run through all the experiments: <a href='https://youtu.be/t3555mA?si=vhwcwjhcVwpFih4'>Video Link</a>
+---
 
+### **Part 5: AI-for-Good Startup - Soul Support 🌍**
+- Leveraged **Claude** to prepare a pitch deck for my **AI-for-good** startup idea: **Soul Support**.
 
+---
 
+### **Part 6: Enhancing Dino Dash 🛠️**
+- Showcased **10 different code development** scenarios Claude Dev can be used for.
+- Improved and refined the **Dino Dash game** with advanced features.
 
+---
 
+📹 **Video Demonstration**: Check out the full walkthrough of all experiments: [Watch the Video](https://youtu.be/t3555mA?si=vhwcwjhcVwpFih4) 🎥
