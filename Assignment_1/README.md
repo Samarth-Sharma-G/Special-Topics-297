@@ -40,4 +40,4 @@
 
 ---
 
-📹 **Video Demonstration**: Check out the full walkthrough of all experiments: [Watch the Video](https://youtu.be/t3555mA?si=vhwcwjhcVwpFih4) 🎥
+📹 **Video Demonstration**: Check out the full walkthrough of all experiments: [Watch the Video](https://youtu.be/wZy4ql_PjHU) 🎥
