@@ -6,11 +6,15 @@ QLoRA fine-tuning of Qwen 2B.
 
 DPO training of Phi-1.5-1.3B with user preference optimization.
 
-PPO training with reinforcement learning.
+PPO training of neox 20B with reinforcement learning.
+
+Finetuned the LLMs using the LLama Board Web UI 
+
+<a href='https://drive.google.com/drive/folders/1nZuBe-orLOyXNhsxZQANphU57I5r8Cd_?usp=drive_link'> Checkpoints from training </a> 
 
 ## B. LM-Studio
 
-Download Gemma 2B, upload PDF, and Q&A on document content.
+Downloaded Gemma 2 2B in LM-Studio, uploaded my diet pdf to the model, and interacted with it. 
 
 ## C. Ollama
    
