@@ -1,0 +1,417 @@
+{
+  "name": "LmStudio with gemma 2b",
+  "systemPrompt": "",
+  "messages": [
+    {
+      "versions": [
+        {
+          "type": "singleStep",
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "What is the Dinner on Mondays?"
+            },
+            {
+              "type": "file",
+              "fileIdentifier": "1726262187694 - 385.docx",
+              "fileType": "application/word",
+              "sizeBytes": 37021
+            },
+            {
+              "type": "file",
+              "fileIdentifier": "1726262187684 - 409.docx",
+              "fileType": "application/word",
+              "sizeBytes": 36998
+            }
+          ],
+          "processed": [
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "This is a Enriched Context Generation scenario.\n\nThe following content was found in the files provided by the user.\n\n\n** 1726262187694 - 385.docx full content **\n\nDaily Diet Plan for MWF (Rice Days) Morning (6:00 AM) - Pre-Breakfast: 2 Dates, 6 Almonds, 1 Tablespoon Ghee, 1 Glass of Milk Lunch (12:30 PM) - 350g Boiled Beans (chana/pinto/rajma/black beans) - 50-70g Curd with Lime, Salt, and Pepper Afternoon Snack (3:00 PM, Pre-Workout) - ½ Banana Post-Workout (4:45 PM, Immediately After Gym) - 1 Scoop Whey Protein Evening Meal (9:00-9:30 PM) - 5 Eggs (Omelet or Scrambled) - 60-80g Uncooked White Rice (cooked, approx. 180-240g) Optional Snack on Rest Days - 15-20g Banana Chips - Cheat Meal: Moderation of outside food like 550-calorie Mango Shake\n\n** end of 1726262187694 - 385.docx **\n\n\n\n** 1726262187684 - 409.docx full content **\n\nDaily Diet Plan for TTS (Chapati Days) Morning (6:00 AM) - Pre-Breakfast: 2 Dates, 6 Almonds, 1 Tablespoon Ghee, 1 Glass of Milk Lunch (12:30 PM) - 350g Boiled Beans (chana/pinto/rajma/black beans) - 50-70g Curd with Lime, Salt, and Pepper Afternoon Snack (3:00 PM, Pre-Workout) - ½ Banana Post-Workout (4:45 PM, Immediately After Gym) - 1 Scoop Whey Protein Evening Meal (9:00-9:30 PM) - 5 Eggs (Omelet or Scrambled) - 2 Whole Wheat Chapatis Optional Snack on Rest Days - 15-20g Banana Chips - Cheat Meal: Moderation of outside food like 550-calorie Mango Shake\n\n** end of 1726262187684 - 409.docx **\n\nBased on the content above, please provide a response to the user query.\n\nUser query: What is the Dinner on Mondays?"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "currentlySelected": 0
+    },
+    {
+      "versions": [
+        {
+          "type": "multiStep",
+          "role": "assistant",
+          "steps": [
+            {
+              "type": "status",
+              "stepIdentifier": "1726262215017-0.42083100239308147",
+              "statusState": {
+                "status": "done",
+                "text": "Chosen context injection strategy: 'inject-full-content'. All content can fit into the context"
+              }
+            },
+            {
+              "type": "debugInfoBlock",
+              "stepIdentifier": "1726262215033-0.7008579667318819",
+              "debugInfo": "Context measurement result:\n\n\tTotal tokens in context: 11\n\tModel context length: 4096\n\tModel remaining context length: 4085\n\tContext occupied percent: 0.27%\n"
+            },
+            {
+              "type": "debugInfoBlock",
+              "stepIdentifier": "1726262215085-0.6511867986496829",
+              "debugInfo": "Total file read time: 47.55 ms"
+            },
+            {
+              "type": "debugInfoBlock",
+              "stepIdentifier": "1726262215086-0.3189744994481323",
+              "debugInfo": "Total tokenize time: 4.50 ms"
+            },
+            {
+              "type": "debugInfoBlock",
+              "stepIdentifier": "1726262215086-0.14885983664075098",
+              "debugInfo": "Original User Prompt: What is the Dinner on Mondays?"
+            },
+            {
+              "type": "debugInfoBlock",
+              "stepIdentifier": "1726262215087-0.35355521090504194",
+              "debugInfo": "Strategy Calculation:"
+            },
+            {
+              "type": "debugInfoBlock",
+              "stepIdentifier": "1726262215088-0.6199173530258499",
+              "debugInfo": "\tTotal Tokens in All Files: 409"
+            },
+            {
+              "type": "debugInfoBlock",
+              "stepIdentifier": "1726262215088-0.5760749984942484",
+              "debugInfo": "\tTotal Tokens in User Prompt: 7"
+            },
+            {
+              "type": "debugInfoBlock",
+              "stepIdentifier": "1726262215088-0.9451868516562509",
+              "debugInfo": "\tModel Context Remaining: 4085 tokens"
+            },
+            {
+              "type": "debugInfoBlock",
+              "stepIdentifier": "1726262215088-0.42630148663792644",
+              "debugInfo": "\tContext Occupied: 0.27%"
+            },
+            {
+              "type": "debugInfoBlock",
+              "stepIdentifier": "1726262215088-0.47679494640520903",
+              "debugInfo": "\tAvailable Tokens: 2851\n"
+            },
+            {
+              "type": "debugInfoBlock",
+              "stepIdentifier": "1726262215094-0.9266126128410666",
+              "debugInfo": "Strategy: inject-full-content. Injecting full content of file '1726262187694 - 385.docx' into the context. Length: 590."
+            },
+            {
+              "type": "debugInfoBlock",
+              "stepIdentifier": "1726262215098-0.8311747629174213",
+              "debugInfo": "Strategy: inject-full-content. Injecting full content of file '1726262187684 - 409.docx' into the context. Length: 562."
+            },
+            {
+              "type": "contentBlock",
+              "stepIdentifier": "1726262215099-0.5698954649652912",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "The dinner on Mondays is **5 Eggs (Omelet or Scrambled) - 60-80g Uncooked White Rice (cooked, approx. 180-240g)**.  \n"
+                }
+              ],
+              "genInfo": {
+                "indexedModelIdentifier": "lmstudio-community/gemma-2-2b-it-GGUF/gemma-2-2b-it-Q4_K_M.gguf",
+                "identifier": "lmstudio-community/gemma-2-2b-it-GGUF/gemma-2-2b-it-Q4_K_M.gguf",
+                "loadModelConfig": {
+                  "fields": [
+                    {
+                      "key": "llm.load.contextLength",
+                      "value": 4096
+                    },
+                    {
+                      "key": "llm.load.llama.acceleration.offloadRatio",
+                      "value": 1
+                    }
+                  ]
+                },
+                "predictionConfig": {
+                  "fields": [
+                    {
+                      "key": "llm.prediction.promptTemplate",
+                      "value": {
+                        "type": "jinja",
+                        "jinjaPromptTemplate": {
+                          "template": "{{ bos_token }}{% if messages[0]['role'] == 'system' %}{{ message['content'] }}{% endif %}{% for message in messages %}{% if (message['role'] == 'assistant') %}{% set role = 'model' %}{% else %}{% set role = message['role'] %}{% endif %}{{ '<start_of_turn>' + role + '\n' + message['content'] | trim + '<end_of_turn>\n' }}{% endfor %}{% if add_generation_prompt %}{{'<start_of_turn>model\n'}}{% endif %}",
+                          "bosToken": "<bos>",
+                          "eosToken": "<eos>"
+                        },
+                        "stopStrings": []
+                      }
+                    },
+                    {
+                      "key": "llm.prediction.llama.cpuThreads",
+                      "value": 4
+                    }
+                  ]
+                },
+                "stats": {
+                  "stopReason": "eosFound",
+                  "tokensPerSecond": 21.115280988082535,
+                  "numGpuLayers": -1,
+                  "timeToFirstTokenSec": 1,
+                  "promptTokensCount": 574,
+                  "predictedTokensCount": 45,
+                  "totalTokensCount": 619
+                }
+              },
+              "defaultShouldIncludeInContext": true,
+              "shouldIncludeInContext": true
+            },
+            {
+              "type": "status",
+              "stepIdentifier": "1726262215417-0.16787344206435306",
+              "statusState": {
+                "status": "done",
+                "text": "Done predicting"
+              }
+            }
+          ]
+        }
+      ],
+      "currentlySelected": 0
+    },
+    {
+      "versions": [
+        {
+          "type": "singleStep",
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Is the diet evenly distributed throughout the day?"
+            }
+          ],
+          "processed": [
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Is the diet evenly distributed throughout the day?"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "currentlySelected": 0
+    },
+    {
+      "versions": [
+        {
+          "type": "multiStep",
+          "role": "assistant",
+          "steps": [
+            {
+              "type": "debugInfoBlock",
+              "stepIdentifier": "1726262282660-0.011923507508347697",
+              "debugInfo": "Retrieval unavailable"
+            },
+            {
+              "type": "debugInfoBlock",
+              "stepIdentifier": "1726262282660-0.03687327660389483",
+              "debugInfo": "Processed content Is the diet evenly distributed throughout the day?"
+            },
+            {
+              "type": "contentBlock",
+              "stepIdentifier": "1726262282660-0.20535390442892498",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "It's difficult to say definitively if the diet is perfectly evenly distributed *throughout the entire day* based solely on the provided information. Here's why:\n\n* **Focus on Meal Times:** The plan primarily focuses on meal timing and types, not necessarily equal portion sizes or calorie distribution throughout the day.\n* **Missing Information:** We don't know the user's exact activity levels, body weight/goals, or individual calorie needs which impact how meals should be structured.\n\n**However, here are some observations:**\n\n* **Rice is a prominent component:** Both MWF and TTS days heavily rely on rice, suggesting it might be higher in calories than other foods. \n* **Snacking:**  Snacks appear to be fairly regular.\n* **Protein-focused:** The plan emphasizes protein intake with Whey protein post-workout and eggs for dinner.\n\n**Overall:** It's possible the diet is not perfectly evenly distributed, as it appears to prioritize meals around specific times. A more accurate assessment would require additional information about: \n\n* Caloric needs\n* Activity levels\n* Individual preferences\n* Goal setting\n\n\n\nLet me know if you have any other questions or need further clarification! \n"
+                }
+              ],
+              "genInfo": {
+                "indexedModelIdentifier": "lmstudio-community/gemma-2-2b-it-GGUF/gemma-2-2b-it-Q4_K_M.gguf",
+                "identifier": "lmstudio-community/gemma-2-2b-it-GGUF/gemma-2-2b-it-Q4_K_M.gguf",
+                "loadModelConfig": {
+                  "fields": [
+                    {
+                      "key": "llm.load.contextLength",
+                      "value": 4096
+                    },
+                    {
+                      "key": "llm.load.llama.acceleration.offloadRatio",
+                      "value": 1
+                    }
+                  ]
+                },
+                "predictionConfig": {
+                  "fields": [
+                    {
+                      "key": "llm.prediction.promptTemplate",
+                      "value": {
+                        "type": "jinja",
+                        "jinjaPromptTemplate": {
+                          "template": "{{ bos_token }}{% if messages[0]['role'] == 'system' %}{{ message['content'] }}{% endif %}{% for message in messages %}{% if (message['role'] == 'assistant') %}{% set role = 'model' %}{% else %}{% set role = message['role'] %}{% endif %}{{ '<start_of_turn>' + role + '\n' + message['content'] | trim + '<end_of_turn>\n' }}{% endfor %}{% if add_generation_prompt %}{{'<start_of_turn>model\n'}}{% endif %}",
+                          "bosToken": "<bos>",
+                          "eosToken": "<eos>"
+                        },
+                        "stopStrings": []
+                      }
+                    },
+                    {
+                      "key": "llm.prediction.llama.cpuThreads",
+                      "value": 4
+                    }
+                  ]
+                },
+                "stats": {
+                  "stopReason": "eosFound",
+                  "tokensPerSecond": 17.932383201435112,
+                  "numGpuLayers": -1,
+                  "timeToFirstTokenSec": 0.187,
+                  "promptTokensCount": 636,
+                  "predictedTokensCount": 248,
+                  "totalTokensCount": 884
+                }
+              },
+              "defaultShouldIncludeInContext": true,
+              "shouldIncludeInContext": true
+            }
+          ]
+        }
+      ],
+      "currentlySelected": 0
+    },
+    {
+      "versions": [
+        {
+          "type": "singleStep",
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "What alternative lunch would you suggest such that calories and protein aspect is similar"
+            }
+          ],
+          "processed": [
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "What alternative lunch would you suggest such that calories and protein aspect is similar"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "currentlySelected": 0
+    },
+    {
+      "versions": [
+        {
+          "type": "multiStep",
+          "role": "assistant",
+          "steps": [
+            {
+              "type": "debugInfoBlock",
+              "stepIdentifier": "1726262415558-0.988650513380738",
+              "debugInfo": "Retrieval unavailable"
+            },
+            {
+              "type": "debugInfoBlock",
+              "stepIdentifier": "1726262415558-0.17168347115416216",
+              "debugInfo": "Processed content What alternative lunch would you suggest such that calories and protein aspect is similar"
+            },
+            {
+              "type": "contentBlock",
+              "stepIdentifier": "1726262415558-0.8220471165159673",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "To create a similar calorie and protein-rich lunch on MWF (rice days), focusing on the beans, curd, and the Whey Protein post workout element of the plan, consider these options:\n\n**1.  Chickpea & Vegetable Salad:**\n    * **Calories:**  Around 400-500 depending on serving size and dressing used.\n    * **Protein:**  High protein due to chickpeas (approx. 20g per cup cooked) and potentially some added lentils or tofu.\n    * **Benefits:** This option allows you to eat a variety of vegetables and provides fiber, which is important for digestion.\n\n**2.  Lentil & Quinoa Salad:**\n    * **Calories:** Around 450-550 depending on cooking method. \n    * **Protein:** High in protein from lentils (approx. 18g per cup cooked) and quinoa (around 8g per cup cooked).\n    * **Benefits:** Provides a complete protein source, fiber-rich, and easy to prepare for different tastes.\n\n**3.  Mixed Bean Burrito Bowl:**\n   * **Calories:** Around 400-500 depending on serving size of rice/quinoa base and toppings. \n   * **Protein:**  High in protein from black beans or chickpeas (approx. 15g per cup cooked). \n   * **Benefits:** Customizable with various veggies, salsa, and a light dressing to keep it fresh.\n\n\n**Important Considerations:**\n\n* **Portion Control:** Even with similar ingredients, portion control is crucial for staying within your calorie needs. Use measuring cups/scoops initially.\n* **Protein Pairing:** Consider pairing these meals with a glass of milk or yogurt for additional protein. \n* **Hydration:** Don't forget to stay hydrated throughout the day!\n\nRemember: These are just starting points, you can always adjust these options based on your specific needs and preferences. Experiment to find what works best for you!"
+                }
+              ],
+              "defaultShouldIncludeInContext": true,
+              "shouldIncludeInContext": true,
+              "genInfo": {
+                "indexedModelIdentifier": "lmstudio-community/gemma-2-2b-it-GGUF/gemma-2-2b-it-Q4_K_M.gguf",
+                "identifier": "lmstudio-community/gemma-2-2b-it-GGUF/gemma-2-2b-it-Q4_K_M.gguf",
+                "loadModelConfig": {
+                  "fields": [
+                    {
+                      "key": "llm.load.contextLength",
+                      "value": 4096
+                    },
+                    {
+                      "key": "llm.load.llama.acceleration.offloadRatio",
+                      "value": 1
+                    }
+                  ]
+                },
+                "predictionConfig": {
+                  "fields": [
+                    {
+                      "key": "llm.prediction.promptTemplate",
+                      "value": {
+                        "type": "jinja",
+                        "jinjaPromptTemplate": {
+                          "template": "{{ bos_token }}{% if messages[0]['role'] == 'system' %}{{ message['content'] }}{% endif %}{% for message in messages %}{% if (message['role'] == 'assistant') %}{% set role = 'model' %}{% else %}{% set role = message['role'] %}{% endif %}{{ '<start_of_turn>' + role + '\n' + message['content'] | trim + '<end_of_turn>\n' }}{% endfor %}{% if add_generation_prompt %}{{'<start_of_turn>model\n'}}{% endif %}",
+                          "bosToken": "<bos>",
+                          "eosToken": "<eos>"
+                        },
+                        "stopStrings": []
+                      }
+                    },
+                    {
+                      "key": "llm.prediction.llama.cpuThreads",
+                      "value": 4
+                    }
+                  ]
+                },
+                "stats": {
+                  "stopReason": "eosFound",
+                  "tokensPerSecond": 13.895748151589919,
+                  "numGpuLayers": -1,
+                  "timeToFirstTokenSec": 0.716,
+                  "promptTokensCount": 906,
+                  "predictedTokensCount": 416,
+                  "totalTokensCount": 1322
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "currentlySelected": 0
+    }
+  ],
+  "usePerChatPredictionConfig": true,
+  "perChatPredictionConfig": {
+    "fields": []
+  },
+  "tokenCount": 1401,
+  "createdAt": 1726262031504,
+  "pinned": false,
+  "clientInput": "",
+  "clientInputFiles": [],
+  "userFilesSizeBytes": 74019,
+  "lastUsedModel": {
+    "indexedModelIdentifier": "lmstudio-community/gemma-2-2b-it-GGUF/gemma-2-2b-it-Q4_K_M.gguf",
+    "identifier": "lmstudio-community/gemma-2-2b-it-GGUF/gemma-2-2b-it-Q4_K_M.gguf",
+    "instanceLoadTimeConfig": {
+      "fields": []
+    },
+    "instanceOperationTimeConfig": {
+      "fields": []
+    }
+  },
+  "notes": []
+}
