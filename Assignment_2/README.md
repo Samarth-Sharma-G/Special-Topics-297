@@ -1,5 +1,9 @@
 # No Code and Low Code Tools for GenAI Use cases
 
+
+<a href=https://youtu.be/q1QowxFal34> Link to a Youtube Video Covering Part A to C </a>
+
+
 ## A. Llama-Factory
    
 QLoRA fine-tuning of Qwen 2B.
