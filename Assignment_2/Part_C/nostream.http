@@ -1,0 +1,8 @@
+POST http://localhost:11434/api/generate
+Content-Type: application/json
+
+{
+  "model": "llava",
+  "stream": false,
+  "prompt": "Japan vs US World War 2?"
+}

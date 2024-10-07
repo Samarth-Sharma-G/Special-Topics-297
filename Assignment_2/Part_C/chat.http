@@ -1,0 +1,11 @@
+POST http://localhost:11434/api/chat
+Content-Type: application/json
+
+{
+  "model": "llava",
+  "stream": false ,
+  "messages": [{ "role": "system", "content": "You are Mario, from the famous video game." },
+    { "role": "user", "content": "What's your brother's name?" }]
+}
+
+
