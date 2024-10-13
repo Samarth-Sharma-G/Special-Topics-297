@@ -3,6 +3,8 @@
 
 <a href=https://youtu.be/q1QowxFal34> Link to a Youtube Video Covering Part A to C </a>
 
+<a href=https://youtu.be/6y_l3tjZX3c> Link to Part D </a>
+
 
 ## A. Llama-Factory
    
@@ -32,9 +34,7 @@ Run Ollama on Colab and integrate with Open WebUI.
 
 ## D. Dify.ai
    
-Demonstrate RAG engine, agents, workflows, and observability.
-
-Deploy Dify.ai locally.
+Demonstrated RAG engine, Agents, workflows, observability and local deployment.
 
 ![Qwen-sft](https://github.com/user-attachments/assets/0316eee9-1ba5-4f86-9357-434f6a2d02c7)
 ![Phi-1 5-1 3B-DPO](https://github.com/user-attachments/assets/e3314e88-a9ad-4075-bc0b-f85fd339c699)
