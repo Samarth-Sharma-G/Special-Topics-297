@@ -43,8 +43,9 @@ I created several chat templates using smaller models:
 
 For reward modeling, I used [Unsloth’s reward modeling documentation](https://docs.unsloth.ai/basics/reward-modelling-dpo-and-orpo) with smaller models:
 
-- **TinyLlama (1B):** Fine-tuned using ORPO to optimize small-scale conversational tasks.
-- **Phi-3 (medium, 3B):** Trained using DPO for sentiment analysis tasks.
+- **Gemma 2B:** Fine-tuned using DPO, ORPO to optimize small-scale conversational tasks.
+
+<a href='https://youtu.be/NE9PjRSuS7o'> Checkout the Demo </a> 
 
 ### 5. Continued Fine-Tuning from Custom Checkpoints
 
