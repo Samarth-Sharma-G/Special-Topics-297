@@ -28,7 +28,9 @@ Each fine-tuning task focused on quick turnaround and minimal compute requiremen
 
 ### 2. Continued Pretraining
 
-I used [Unsloth AI](https://docs.unsloth.ai/basics/continued-pretraining) to perform continued pretraining on **TinyLlama (1B)** to learn a new language (Spanish). By keeping the model size small, I ensured fast execution during the pretraining process.
+I used [Unsloth AI](https://docs.unsloth.ai/basics/continued-pretraining) to perform continued pretraining on **Phi 3** to learn a new language (Gujarati). By keeping the model size small, I ensured fast execution during the pretraining process.
+
+<a href = 'https://youtu.be/npC29msCl1o'> Checkout the Demo on how it turned out </a>
 
 ### 3. Chat Templates
 
