@@ -51,7 +51,9 @@ For reward modeling, I used [Unsloth’s reward modeling documentation](https://
 
 ### 5. Continued Fine-Tuning from Custom Checkpoints
 
-I fine-tuned the **Gemma 2 (2B)** model from a custom checkpoint to showcase the ability to extend its knowledge for a chatbot use case, keeping the dataset and task size minimal for faster execution.
+I continued fine-tuning the **Mistral Nemo** model from a custom checkpoint to run some more steps for the Medical Advisor Usecase.
+
+<a href='https://youtu.be/E0SaalWoaR0'> Demo Link </a>
 
 ### 6. Fine-Tuning for Mental Health Chatbot Development
 
