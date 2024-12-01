@@ -38,8 +38,7 @@ I used [Unsloth AI](https://docs.unsloth.ai/basics/continued-pretraining) to per
 
 I created several chat templates using smaller models:
 
-- **Phi-3 (medium, 3B):** Trained on a classification task for short user queries.
-- **TinyLlama (1B):** Used for conversational tasks and extended max context size to handle longer queries with reduced dataset sizes.
+Covered in the finetuning (1) (all 4 usecases have custom templates) and continued pretraining (2). All the chat templates are custom.
 
 ### 4. Reward Modeling
 
