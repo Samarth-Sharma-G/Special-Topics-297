@@ -17,10 +17,10 @@ Each notebook contains step-by-step explanations of setup, training, and visuali
 
 ### 2. Tabular
 
-- **Synthetic Data Generation**: Successfully generated synthetic data for a real dataset.
-- **Zero-Shot Inference**: Demonstrated inference on a Tabular model using zero-shot learning.
+- **Synthetic Data Generation**: Successfully generated synthetic data for IRIS dataset.
+- **Zero-Shot Inference**: Demonstrated inference on a Tabular model using zero-shot learning on Anime dummy data.
 
-These notebooks showcase Tabular's capabilities in generating and inferring data.
+These notebooks showcase Tabula's capabilities in generating and inferring data.
 
 ### 3. RelBench with RDL
 
