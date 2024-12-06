@@ -7,11 +7,11 @@ This repository contains completed Colab notebooks for forecasting and anomaly d
 ### 1. TimeGPT
 
 Each notebook in this section demonstrates TimeGPT applied to various time series forecasting tasks:
-- **Multivariate Forecasting**: Completed with example data.
-- **Fine-Tuning with Custom Data**: Model fine-tuned on custom datasets for optimized forecasting.
-- **Anomaly Detection**: Time series anomalies detected and visualized.
+- **Multivariate Forecasting**: generated some random dummy data which had absolutely no pattern so the model did well by performing badly.
+- **Fine-Tuning with Custom Data**: Model fine-tuned on custom airline data timeline vs passangers and some good performance.
+- **Anomaly Detection**: Time series anomalies detected and visualized with confidence levels.
 - **Energy Demand Forecasting**: Energy demand predictions with accurate results.
-- **Bitcoin Price Prediction**: Bitcoin price forecasting with TimeGPT.
+- **Ethereum Price Prediction**: Ethereum price forecasting with TimeGPT (Not that great and the creators know it cause time can't be the only factor here and we need an extensive dataset with virtually everyting the price depends on - these can be added as exogenous variables).
 
 Each notebook contains step-by-step explanations of setup, training, and visualization.
 
