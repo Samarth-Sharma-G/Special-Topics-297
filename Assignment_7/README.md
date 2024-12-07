@@ -41,21 +41,17 @@ This repository showcases various prompt engineering techniques, practical examp
 
 ### 4. OpenAI Example Implementations
 - **PALM 2 API**:
-  - Colab implementation of OpenAI examples.
-  - Notebook: [OpenAI Examples for PALM 2](#)
-
+  - Colab implementation of OpenAI examples in Palm 2.
 
 
 ### 5. Function Calls API
-- **Colab Example**:
-  - Function calls use case with OpenAI API.
-  - Notebook: [Function Calls API Use Case](#)
-
-
-
+- Colab Example:
+- Function calls use case for routing customer queries to appropriate actions and extracting relevant parameters using OpenAI API.
+- Notebook: Support e_and_h.ipynb
+  
 ### 6. System Prompt Example
-- **System Prompt Use Case**:
-  - Showcasing OpenAI’s system prompt capabilities.
-  - Notebook: [System Prompt Use Case](#)
+- System Prompt Use Case:
+- Showcasing OpenAI's system prompt capabilities for task-specific query handling and structured output generation.
+- Notebook: Support e_and_h.ipynb
 
 
