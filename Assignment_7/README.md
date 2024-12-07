@@ -18,7 +18,7 @@ This repository showcases various prompt engineering techniques, practical examp
   - REACT (Reasoning + Acting Pattern)
 
 - **Artifacts**:
-  - Colab Notebook: [Prompt Engineering Examples](#)
+  - Colab Notebook: prompting_techniques.ipynb
 
 
 
