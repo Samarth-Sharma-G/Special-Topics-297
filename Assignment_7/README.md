@@ -25,17 +25,17 @@ This repository showcases various prompt engineering techniques, practical examp
 ### 2. Prompt Templates
 - **21 Templates**:
   - Designed based on practical examples and class discussions.
-  - Cover success and failure cases for each pattern.
-  - Slide Deck and Notebook: [Prompt Templates in Action](#)
+  - Cover goal and use cases for each pattern.
+  - Templates: Prompt Templates.pdf
 
 
 
 ### 3. Diverse Fields Prompts
 - **10 Fields**:
-  - HR, Teaching, Finance, Healthcare, Marketing, Customer Support, Software Development, Creative Writing, Legal, Data Science.
+  - HR, Teaching, Finance, Healthcare, Marketing, Customer Support, Software Development, Creative Writing, Legal, Education.
 - **30 Prompts**:
   - Three diverse and useful prompts for each field with test cases.
-  - Notebook: [Diverse Field Prompts](#)
+  - Doc: Diverse_Field_Prompts.pdf
 
 
 
