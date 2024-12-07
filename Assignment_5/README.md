@@ -2,6 +2,8 @@
 
 This repository contains completed Colab notebooks for forecasting and anomaly detection with TimeGPT, synthetic data generation with Tabular, and GNN-based tabular predictions using RelBench. Each notebook is fully executed and includes results for review.
 
+### <a href='https://youtu.be/wXTOVOMjxiM'> Checkout the Video </a>
+
 ## Project Contents
 
 ### 1. TimeGPT
