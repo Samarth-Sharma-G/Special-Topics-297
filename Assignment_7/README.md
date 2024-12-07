@@ -16,7 +16,6 @@ This repository showcases various prompt engineering techniques, practical examp
   - AOT (Algorithm-Oriented Thought)
   - RASCEF (Reasoning, Analysis, Synthesis, Critical Evaluation Framework)
   - REACT (Reasoning + Acting Pattern)
-  - Forest of Thoughts (using LangChain)
 
 - **Artifacts**:
   - Colab Notebook: [Prompt Engineering Examples](#)
