@@ -4,10 +4,12 @@ This repository contains implementations for two projects:
 
 1. **Nanogpt from Scratch**:
    - Built using PyTorch, inspired by Andrej Karpathy's Nanogpt.
-   - Modular code with debugging and training on a custom dataset (non-Shakespeare).
-   - Includes a Colab notebook, Medium article, and a presentation.
+   - Modular code with debugging and training on a custom dataset.
+     
+   <a href = 'https://youtu.be/2iwgEG09KmI'> Demo Video </a>
 
 2. **"Textbooks are All You Need" Case Study**:
-   - Recreated using a smaller dataset on Colab Pro (A100 setup).
+   - Recreated using a smaller dataset on Colab Pro.
    - Covers end-to-end training, evaluation, and insights.
-   - Artifacts include the Colab notebook, dataset, and presentation.
+  
+   <a href = 'https://youtu.be/eZfuIoQk0oQ'> Demo Video </a>
