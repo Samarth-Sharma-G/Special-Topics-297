@@ -3,6 +3,8 @@
 ## Overview
 This project demonstrates the development of a Retrieval-Augmented Generation (RAG)-based GenAI application designed to answer user queries related to a collection of books. The application integrates an efficient retrieval mechanism using Weaviate for storing book data in chunks and employs OpenAI's GPT models for generating context-aware answers.
 
+## <a href='https://youtu.be/U7oscT9IM_E'> Demo Video </a>
+
 ## Features
 - **Retrieval-Augmented Generation (RAG):** Combines knowledge retrieval from stored book chunks with generative AI to produce accurate, contextually relevant answers.
 - **Efficient Query Handling:** Uses Weaviate for fast vector search to retrieve relevant chunks of book data.
